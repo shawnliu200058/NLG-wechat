@@ -1,0 +1,19 @@
+{
+	"uni-app": {
+		"scripts": {
+			"mp-test": {
+				"title": "测试环境",
+				"env": {
+					"UNI_PLATFORM": "h5"
+				},
+				"define": {
+					"MP-TEST": true
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"uni-read-pages": "^1.0.5",
+		"uni-simple-router": "^2.0.7"
+	}
+}

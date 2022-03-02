@@ -1,0 +1,1 @@
+<view class="home data-v-618484b5"><swiper indicator-dots="{{true}}" circular="{{true}}" autoplay="{{true}}" interval="{{3000}}" class="data-v-618484b5"><block wx:for="{{carousels}}" wx:for-item="item" wx:for-index="__i0__" wx:key="id"><swiper-item class="data-v-618484b5"><image src="{{item.picSrc}}" class="data-v-618484b5"></image></swiper-item></block></swiper></view>

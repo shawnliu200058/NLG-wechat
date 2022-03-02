@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "main-info": "/pages/goodDetail/cpns/mainInfo",
+    "detail-info": "/pages/goodDetail/cpns/detailInfo",
+    "good-nav": "/pages/goodDetail/cpns/goodNav"
+  }
+}

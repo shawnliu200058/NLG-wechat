@@ -1,0 +1,1 @@
+<uni-icons vue-id="71752d62-1" type="{{isSelect?'checkbox':'circle'}}" size="{{size}}" color="{{color}}" bind:__l="__l"></uni-icons>

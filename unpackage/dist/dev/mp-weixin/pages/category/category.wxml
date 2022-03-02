@@ -1,0 +1,1 @@
+<view class="container data-v-682a9774"><uni-search-bar vue-id="9d275500-1" radius="{{100}}" placeholder="搜索商品名称" data-event-opts="{{[['^confirm',[['search']]]]}}" bind:confirm="__e" class="data-v-682a9774" bind:__l="__l"></uni-search-bar><category-list vue-id="9d275500-2" categoryList="{{list}}" class="data-v-682a9774" bind:__l="__l"></category-list></view>

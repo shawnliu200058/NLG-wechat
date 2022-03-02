@@ -1,0 +1,209 @@
+<template>
+	<view class="overall">
+		<uni-forms ref="form" :modelValue="formData" label-position="top" :labelWidth="150">
+			<uni-forms-item required label="名称" name="name">
+				<uni-easyinput type="text" v-model="formData.name" placeholder="请输入商品名称" />
+			</uni-forms-item>
+			<uni-forms-item required name="categoryId" label="类别">
+				<uni-data-picker :localdata="categoryData" v-model="formData.categoryId" placeholder="请选择商品类别"
+					popup-title="商品类别"></uni-data-picker>
+			</uni-forms-item>
+			<uni-forms-item label="商品详情" name="detail">
+				<uni-easyinput type="textarea" v-model="formData.detail" placeholder="请输入商品详情" trim></uni-easyinput>
+			</uni-forms-item>
+			<uni-forms-item required name="price" label="价格(单位:元)">
+				<uni-easyinput type="number" v-model="formData.price" placeholder="请输入价格"></uni-easyinput>
+			</uni-forms-item>
+			<uni-forms-item required name="unit" label="计量单位">
+				<uni-easyinput placeholder="请输入计量单位" v-model="formData.unit"></uni-easyinput>
+			</uni-forms-item>
+			<uni-forms-item required name="specification" label="规格">
+				<uni-easyinput placeholder="请输入规格" v-model="formData.specification"></uni-easyinput>
+			</uni-forms-item>
+			<uni-forms-item required name="stock" label="库存">
+				<uni-number-box :min="1" :max="99999" v-model="formData.stock"></uni-number-box>
+			</uni-forms-item>
+			<uni-forms-item required name="address" label="发货地址">
+				<uni-easyinput placeholder="请输入发货地址" v-model="formData.address"></uni-easyinput>
+				<view @click="getLocation" class="position">
+					<uni-icons type="location-filled" size="22"></uni-icons>
+					<text>定位</text>
+				</view>
+			</uni-forms-item>
+			<uni-forms-item required name="imgCount" label="展示图">
+				<uni-file-picker fileMediatype="image" :limit="1"
+				@select="selectDisplayPic" @delete="deleteFile"/>
+			</uni-forms-item>
+			<uni-forms-item label="详情图">
+				<uni-file-picker fileMediatype="image" mode="grid"
+				 @select="selectDetailPic"/>
+			</uni-forms-item>
+			<text v-model="formData.imgCount"></text>
+		</uni-forms>
+
+		<button type="primary" size="mini" @click="submit">提交</button>
+	</view>
+</template>
+
+<script>
+	import { mapGetters } from 'vuex'
+	
+	import rules from './config/rules.js'
+	import { createGood } from '../../api/publish.js'
+	import QQMapWX from '@/common/qqmap-wx-jssdk.min.js'
+
+	export default {
+		data() {
+			return {
+				categoryData: [],
+				rules: {},
+				formData: {
+					name: '',
+					categoryId: '',
+					detail: '',
+					price: null,
+					unit: '',
+					stock: 1,
+					specification: '',
+					address: '',
+					imageValue: [],
+					imgCount: 0
+				},
+				displayPicUrl: '',
+				detailPicUrl: []
+			}
+		},
+		computed: {
+			...mapGetters(['categoryList']),
+		},
+		onReady() {
+			this.$refs.form.setRules(rules)
+		},
+		onLoad() {
+			this.getCategory()
+		},
+		methods: {
+			getCategory() {
+				this.categoryList.forEach(item => {
+					const {name: text, id: value} = item
+					this.categoryData.push({text, value})
+				})
+			},
+			getLocation() {
+				uni.getLocation({
+					success: (res) => {
+						console.log(res)
+						const { latitude, longitude } = res
+						this.getNowAddressInfo(res)
+						uni.chooseLocation({
+							latitude,
+							longitude,
+							success: (res) => {
+								console.log(res.address)
+								this.formData.address = res.address
+							}
+						})
+					}
+				})
+				
+				// uni.chooseLocation({
+				// 	success: (res) => {
+				// 		console.log(res.address)
+				// 		this.formData.address = res.address
+				// 	}
+				// })
+			},
+			selectDisplayPic(e) {
+				this.formData.imgCount++
+				console.log('选择成功', e.tempFilePaths)
+				this.displayPicUrl = e.tempFilePaths[0]
+			},
+			selectDetailPic(e) {
+				this.detailPicUrl = e.tempFilePaths
+			},
+			submit(form) {
+				let that = this
+				
+				uni.showModal({
+					title: '提示',
+					content: '是否发布商品信息',
+					success: function (res) {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							that.$refs.form.validate().then(res=>{
+								console.log('表单数据信息：', res);
+								createGood(that.formData).then(res => {
+									console.log(res.data[0].insertId)
+									const goodId = res.data[0].insertId
+									
+									// 上传商品展示图
+									uni.uploadFile({
+										url: `http://localhost:8888/upload/displayPic/${goodId}`, //仅为示例，非真实的接口地址
+										filePath: that.displayPicUrl,
+										name: 'displayPic',
+										// formData: {
+										// 	'user': 'test'
+										// },
+										success: (uploadFileRes) => {
+											console.log(uploadFileRes.data);
+										}
+									});
+									
+									// 上传商品详情图
+									that.detailPicUrl.forEach(path => {
+										uni.uploadFile({
+											url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
+											filePath: path,
+											name: 'detailPic',
+											success: (uploadFileRes) => {
+												console.log(uploadFileRes.data);
+											}
+										});
+									})
+									
+									uni.showToast({
+										title: '提交成功'
+									})
+								})
+									
+							}).catch(err =>{
+									console.log('表单错误信息：', err);
+							})
+								
+						} else if (res.cancel) {
+								console.log('用户点击取消');
+						}
+					}
+				});
+			},
+			deleteFile() {
+				this.formData.imgCount--
+			},
+			getNowAddressInfo(curLoc) {
+				const qqMapSdk = new QQMapWX({
+					key: 'MS6BZ-MCUWX-EO346-7R6FM-SYV37-CUB5O',
+				})
+				qqMapSdk.reverseGeocoder({
+					location: {
+						longitude: curLoc.longitude,
+						latitude: curLoc.latitude
+					},
+					success: res => {
+						console.log(res.result.address)
+					}
+				})
+			}
+		}
+	}
+</script>
+
+<style scoped lang="scss">
+	.position {
+		display: flex;
+		align-items: center;
+		margin-top: 10rpx;
+		.uni-icons {
+			margin-right: 8rpx;
+		}
+	}
+</style>

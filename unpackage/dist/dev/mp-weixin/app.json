@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/login/login",
+    "pages/my/my",
+    "pages/publish/publish",
+    "pages/goodDetail/goodDetail",
+    "pages/cart/cart"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "农乐购",
+    "navigationBarBackgroundColor": "#0ef878",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbarIcon/home.png",
+        "selectedIconPath": "static/tabbarIcon/home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "iconPath": "static/tabbarIcon/category.png",
+        "selectedIconPath": "static/tabbarIcon/category-active.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "iconPath": "static/tabbarIcon/cart.png",
+        "selectedIconPath": "static/tabbarIcon/cart-active.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/tabbarIcon/my.png",
+        "selectedIconPath": "static/tabbarIcon/my-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您当前的位置信息将自动作为发货地址"
+    }
+  },
+  "usingComponents": {}
+}

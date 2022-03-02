@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar",
+    "uni-fab": "/uni_modules/uni-fab/components/uni-fab/uni-fab",
+    "carousel-list": "/pages/index/cpns/carouselList",
+    "category": "/pages/index/cpns/category",
+    "recommended-view-list": "/pages/index/cpns/recommededView"
+  }
+}

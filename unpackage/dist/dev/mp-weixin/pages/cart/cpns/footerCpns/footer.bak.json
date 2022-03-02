@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cart-checkbox": "/components/checkbox/cartCheckbox"
+  },
+  "component": true
+}

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "购物车",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
+    "cart-list": "/pages/cart/cpns/cartList",
+    "settlement": "/pages/cart/cpns/footerCpns/settlement",
+    "edit": "/pages/cart/cpns/footerCpns/edit"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "top": "/pages/my/cpns/top",
+    "middle": "/pages/my/cpns/midddle",
+    "bottom": "/pages/my/cpns/bottom"
+  }
+}

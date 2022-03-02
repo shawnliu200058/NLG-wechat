@@ -1,0 +1,1 @@
+<view container="{{true}}" class="data-v-54eb02f4"><main-info vue-id="48745980-1" goodInfo="{{goodInfo}}" class="data-v-54eb02f4" bind:__l="__l"></main-info><detail-info vue-id="48745980-2" goodInfo="{{goodInfo}}" class="data-v-54eb02f4" bind:__l="__l"></detail-info><good-nav vue-id="48745980-3" goodInfo="{{goodInfo}}" class="data-v-54eb02f4" bind:__l="__l"></good-nav></view>

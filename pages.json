@@ -1,0 +1,93 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"name": "index",
+			"aliasPath": "/",
+			"style": {
+				// "navigationBarTitleText": "农乐购"
+			}
+		}, {
+			"path": "pages/category/category",
+			"name": "category",
+			"style": {
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/login/login",
+			"name": "login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/my/my",
+			"name": "my",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/publish/publish",
+			"name": "publish",
+			"style": {
+				"navigationBarTitleText": "发布供应",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/goodDetail/goodDetail",
+			"name": "goodDetail",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/cart/cart",
+			"name": "cart",
+			"style": {
+				"navigationBarTitleText": "购物车",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "农乐购",
+		"navigationBarBackgroundColor": "#0ef878",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		// "color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		// "borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbarIcon/home.png",
+				"selectedIconPath": "static/tabbarIcon/home-active.png",
+				"text": "首页"
+			}, {
+				"pagePath": "pages/category/category",
+				"iconPath": "static/tabbarIcon/category.png",
+				"selectedIconPath": "static/tabbarIcon/category-active.png",
+				"text": "分类"
+			},
+			{
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/tabbarIcon/cart.png",
+				"selectedIconPath": "static/tabbarIcon/cart-active.png",
+				"text": "购物车"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"iconPath": "static/tabbarIcon/my.png",
+				"selectedIconPath": "static/tabbarIcon/my-active.png",
+				"text": "我的"
+			}
+		]
+	}
+}

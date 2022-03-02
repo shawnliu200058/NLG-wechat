@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['accountLogin',['$event']]]]]}}" class="center container data-v-4030dc27" bindtap="__e"><text class="data-v-4030dc27">——————</text><text class="other data-v-4030dc27">其他登录</text><text class="data-v-4030dc27">——————</text></view>
