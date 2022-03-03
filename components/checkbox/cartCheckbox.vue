@@ -17,9 +17,6 @@
 				type: String,
 				default: '#005500'
 			}
-		},
-		beforeMount() {
-			console.log(this.isSelect)
 		}
 	}
 </script>

@@ -24,18 +24,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container.data-v-2e1f1174 {
+.container .address.data-v-1ff0ce4c {
+  justify-content: space-between;
+}
+.container .fixedFooter.data-v-1ff0ce4c {
   position: fixed;
   width: 100%;
-  bottom: 105rpx;
+  bottom: 0;
 }
-.container .content.data-v-2e1f1174 {
-  padding-left: 20rpx;
-  justify-content: space-between;
-  height: 80rpx;
-  border-top: 1px solid #f8f8f8;
-}
-.container .content .btn.data-v-2e1f1174 {
+.container .fixedFooter .btn.data-v-1ff0ce4c {
   width: 25%;
   height: 100%;
   color: #F8F8F8;

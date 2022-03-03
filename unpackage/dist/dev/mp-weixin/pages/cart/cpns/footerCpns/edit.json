@@ -1,6 +1,6 @@
 {
+  "component": true,
   "usingComponents": {
     "cart-footer": "/pages/cart/cpns/footerCpns/cartFooter"
-  },
-  "component": true
+  }
 }

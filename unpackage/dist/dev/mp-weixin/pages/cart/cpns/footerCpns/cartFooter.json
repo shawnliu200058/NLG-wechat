@@ -1,6 +1,7 @@
 {
+  "component": true,
   "usingComponents": {
-    "cart-checkbox": "/components/checkbox/cartCheckbox"
-  },
-  "component": true
+    "cart-checkbox": "/components/checkbox/cartCheckbox",
+    "common-footer": "/components/commonFooter/commonFooter"
+  }
 }

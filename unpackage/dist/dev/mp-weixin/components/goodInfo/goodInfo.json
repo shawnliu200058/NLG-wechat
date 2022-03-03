@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "uni-title": "/uni_modules/uni-title/components/uni-title/uni-title"
+  },
+  "component": true
+}

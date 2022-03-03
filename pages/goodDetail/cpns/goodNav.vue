@@ -3,7 +3,7 @@
 		<uni-popup ref="popup" type="bottom" background-color="#fff">
 			<view class="popup-container">
 				<view class="container1">
-					<image :src="goodInfo.displayPicUrl" mode="aspectFit"></image>
+					<image :src="goodInfo.displayPicUrl" mode="aspectFill" style="margin-right: 20rpx;"></image>
 					
 					<text class="close" @click="$refs.popup.close()">✖</text>
 					
@@ -48,11 +48,6 @@
 		computed: {
 			...mapGetters(['goodsCountInCart'])
 		},
-		// watch: {
-		// 	goodsCountInCart(newVal) {
-		// 		this.options[1].info = newVal
-		// 	}
-		// },
 		data() {
 			return {
 				purchaseQuantity: 1,
@@ -83,7 +78,8 @@
 		},
 		methods: {
 			...mapMutations({
-				addToCart: 'SET_CART_LIST'
+				addToCart: 'SET_CART_LIST',
+				setTotalPrice: 'SET_TOTAL_PRICE'
 			}),
 			collectOrCart(e) {
 				if(e.index === 0) {
@@ -121,6 +117,7 @@
 					// 下面这行是错误的，因为是地址引用，this.goodInfo变化的同时state.list也会变化，会和mutations冲突
 					// this.goodInfo.count = this.purchaseQuantity => this.addToCart(this.goodInfo)
 					this.addToCart({goodInfo: this.goodInfo, count})
+					this.setTotalPrice()
 					this.$refs.popup.close()
 					uni.showToast({
 						title: '加入购物车',
@@ -148,8 +145,8 @@
 			}
 			
 			image {
-				width: 300rpx;
-				height: 300rpx;
+				width: 200rpx;
+				height: 200rpx;
 			}
 				
 			.good-info {

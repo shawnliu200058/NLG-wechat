@@ -6,7 +6,8 @@
     "pages/my/my",
     "pages/publish/publish",
     "pages/goodDetail/goodDetail",
-    "pages/cart/cart"
+    "pages/cart/cart",
+    "pages/order/order"
   ],
   "subPackages": [],
   "window": {

@@ -10,7 +10,9 @@ const getters = {
 	cartList: state => state.cart.list,
 	goodsCountInCart: state => state.cart.goodsCount,
 	// 是否全选购物车的商品
-	isSelectAll: state => state.cart.isSelectAll
+	isSelectAll: state => state.cart.isSelectAll,
+	// 选中商品总价
+	totalPrice: state => state.cart.totalPrice
 }
 
 export default getters

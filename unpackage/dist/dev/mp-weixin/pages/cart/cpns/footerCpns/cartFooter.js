@@ -114,7 +114,29 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -138,7 +160,8 @@ var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumera
 
 
 
-(0, _vuex.createNamespacedHelpers)('cart'),mapMutations = _createNamespacedHelp.mapMutations;var CartCheckbox = function CartCheckbox() {__webpack_require__.e(/*! require.ensure | components/checkbox/cartCheckbox */ "components/checkbox/cartCheckbox").then((function () {return resolve(__webpack_require__(/*! @/components/checkbox/cartCheckbox.vue */ 423));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+(0, _vuex.createNamespacedHelpers)('cart'),mapMutations = _createNamespacedHelp.mapMutations;var CartCheckbox = function CartCheckbox() {__webpack_require__.e(/*! require.ensure | components/checkbox/cartCheckbox */ "components/checkbox/cartCheckbox").then((function () {return resolve(__webpack_require__(/*! @/components/checkbox/cartCheckbox.vue */ 423));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CommonFooter = function CommonFooter() {__webpack_require__.e(/*! require.ensure | components/commonFooter/commonFooter */ "components/commonFooter/commonFooter").then((function () {return resolve(__webpack_require__(/*! @/components/commonFooter/commonFooter.vue */ 452));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 
 
 
@@ -146,22 +169,58 @@ var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumera
   props: {
     rightText: {
       type: String,
-      default: '结算' } },
+      default: '结算' },
+
+    bgColor: {
+      type: String,
+      default: '#00dc00' },
+
+    actionType: {
+      type: Number,
+      required: true } },
 
 
   components: {
-    CartCheckbox: CartCheckbox },
+    CartCheckbox: CartCheckbox,
+    CommonFooter: CommonFooter },
 
-  computed: _objectSpread({},
-  (0, _vuex.mapGetters)(['goodsCountInCart', 'isSelectAll', 'cartList'])),
+  computed: _objectSpread(_objectSpread({},
+  (0, _vuex.mapGetters)(['goodsCountInCart', 'isSelectAll', 'cartList', 'totalPrice'])), {}, {
+    cssVars: function cssVars() {
+      return {
+        '--bgColor': this.bgColor };
+
+    } }),
 
   methods: _objectSpread(_objectSpread({},
   mapMutations({
-    setIsSelectAll: 'SET_IS_SELECT_ALL' })), {}, {
+    setIsSelectAll: 'SET_IS_SELECT_ALL',
+    deleteCartGood: 'DELETE_CART_GOOD',
+    setTotalPrice: 'SET_TOTAL_PRICE' })), {}, {
 
     clickSelectAll: function clickSelectAll() {
       this.setIsSelectAll(!this.isSelectAll);
+      this.setTotalPrice();
+    },
+    handleCart: function handleCart() {var _this = this;
+      // 结算
+      if (this.actionType) {
+        // 前往订单页
+        this.$Router.push({ name: 'order' });
+      } else {
+        uni.showModal({
+          title: '提示',
+          content: '确定删除商品吗',
+          success: function success(res) {
+            if (res.confirm) {
+              _this.deleteCartGood();
+              _this.setTotalPrice();
+            }
+          } });
+
+      }
     } }) };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

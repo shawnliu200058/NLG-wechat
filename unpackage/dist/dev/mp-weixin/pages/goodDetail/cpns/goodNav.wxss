@@ -38,8 +38,8 @@
   color: #c1aca3;
 }
 .popup-container .container1 image.data-v-f956e2be {
-  width: 300rpx;
-  height: 300rpx;
+  width: 200rpx;
+  height: 200rpx;
 }
 .popup-container .container1 .good-info.data-v-f956e2be {
   font-size: 14px;

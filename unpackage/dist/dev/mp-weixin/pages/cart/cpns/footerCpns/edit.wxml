@@ -1,1 +1,1 @@
-<cart-footer vue-id="404a36b1-1" rightText="删除" bind:__l="__l"></cart-footer>
+<cart-footer vue-id="404a36b1-1" rightText="删除" actionType="{{0}}" bgColor="#b55a00" bind:__l="__l"></cart-footer>

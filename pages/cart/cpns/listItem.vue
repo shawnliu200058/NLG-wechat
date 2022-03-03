@@ -1,21 +1,19 @@
 <template>
 	<view class="container">
 		<uni-card>
-			<view :key="item.id" class="good-content">
-				<!-- <uni-icons :type="item.isSelected ? 'checkbox' : 'circle'" 
-					:size="30" @click="isSelectGood(item.id, item.isSelected)"></uni-icons> -->
+			<good-info :item="item">
+				<template #checkbox>
 					<cart-checkbox :isSelect="item.isSelected" @click.native="isSelectGood(item.id, item.isSelected)"></cart-checkbox>
-				<image :src="item.displayPicUrl" mode="aspectFill"></image>
-				<view class="good-item">
-					<view class="common-padding">{{item.name}}</view>
-					<!-- <view class="stock common-padding">库存：{{item.stock}}</view> -->
-					<uni-title :title="`￥${item.price.toFixed(2)}/${item.unit}`" type="h4" color="red"></uni-title>
+				</template>
+				<template #number-box>
 					<uni-number-box :min="1" v-model="item.count" @change="countChange"></uni-number-box>
-				</view>
-			</view>
+				</template>
+			</good-info>
 		</uni-card>
 	</view>
 </template>
+
+
 
 <script>
 	import {
@@ -26,6 +24,7 @@
 	} = createNamespacedHelpers('cart')
 	
 	import CartCheckbox from '@/components/checkbox/cartCheckbox.vue'
+	import GoodInfo from '@/components/goodInfo/goodInfo.vue'
 	
 	export default {
 		props: {
@@ -35,23 +34,23 @@
 			}
 		},
 		components: {
-			CartCheckbox
+			CartCheckbox,
+			GoodInfo
 		},
 		methods: {
 			...mapMutations({
 				setIsSelected: 'SET_IS_SELECTED',
-				setCount: 'SET_COUNT'
+				setCount: 'SET_COUNT',
+				setTotalPrice: 'SET_TOTAL_PRICE'
 			}),
-			edit() {
-				console.log(12)
-			},
 			isSelectGood(goodId, isSelected) {
 				this.isSelected = !this.isSelected
-				console.log(isSelected)
-				this.setIsSelected({goodId, isSelected: !isSelected})
+				this.setIsSelected({goodId, isSelected: !isSelected}),
+				this.setTotalPrice()
 			},
 			countChange(goodCount) {
 				this.setCount({goodId: this.item.id, count: goodCount})
+				this.setTotalPrice()
 			}
 		}
 	}
@@ -82,6 +81,5 @@
 			font-size: 12px;
 			color: $uni-text-color-grey;
 		}
-		
 	}
 </style>

@@ -3,7 +3,8 @@ import Vue from 'vue'
 const state = {
 	list: [],
 	goodsCount: 0,
-	isSelectAll: true
+	isSelectAll: true,
+	totalPrice: 0
 }
 
 const mutations = {
@@ -95,6 +96,25 @@ const mutations = {
 			}) 
 		}
 		state.isSelectAll = isCheckAll
+	},
+	// 删除购物车商品
+	DELETE_CART_GOOD(state) {
+		console.log(123)
+		for(let i = 0; i < state.list.length; i++) {
+			if(state.list[i].isSelected) {
+				state.goodsCount -= state.list[i].count
+				state.list.splice(i--, 1)
+			}
+		}
+	},
+	// 选中商品的总价
+	SET_TOTAL_PRICE(state) {
+		// 每次重新计算都要清零
+		state.totalPrice = 0
+		state.list.forEach(item => {
+			if(item.isSelected) state.totalPrice += item.price * item.count
+		})
+		if(!Number.isInteger(state.totalPrice)) state.totalPrice = state.totalPrice.toFixed(2)
 	}
 }
 

@@ -1,5 +1,5 @@
 <template>
-	<cart-footer></cart-footer>
+	<cart-footer :actionType="1"></cart-footer>
 </template>
 
 <script>

@@ -52,6 +52,14 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/order/order",
+			"name": "order",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {
