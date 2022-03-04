@@ -128,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var PlaceOrder = function PlaceOrder() {Promise.all(/*! require.ensure | pages/order/cpns/placeOrder */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/order/cpns/placeOrder")]).then((function () {return resolve(__webpack_require__(/*! ./cpns/placeOrder.vue */ 271));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var PlaceOrder = function PlaceOrder() {Promise.all(/*! require.ensure | pages/order/cpns/placeOrder */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/order/cpns/placeOrder")]).then((function () {return resolve(__webpack_require__(/*! ./cpns/placeOrder.vue */ 288));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 

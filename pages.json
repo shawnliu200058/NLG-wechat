@@ -60,6 +60,21 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/address/address",
+			"name": "address",
+			"style": {
+				"navigationBarTitleText": "收货地址",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/editAddress/editAddress",
+			"name": "editAddress",
+			"style": {
+				"navigationBarTitleText": "地址编辑",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {

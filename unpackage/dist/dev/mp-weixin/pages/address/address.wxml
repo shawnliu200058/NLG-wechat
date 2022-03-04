@@ -1,0 +1,1 @@
+<view class="container center data-v-db675620"><circle-btn class="btn data-v-db675620" vue-id="91826bd4-1" text="新增地址" data-event-opts="{{[['tap',[['editAddress',['$event']]]]]}}" bindtap="__e" bind:__l="__l"></circle-btn></view>

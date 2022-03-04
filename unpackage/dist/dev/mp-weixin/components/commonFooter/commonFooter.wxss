@@ -24,12 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container.data-v-56ab2344 {
-  position: fixed;
-  width: 100%;
-  bottom: var(--bottom);
-}
-.container .content.data-v-56ab2344 {
+.content.data-v-56ab2344 {
   padding-left: 20rpx;
   justify-content: space-between;
   height: 80rpx;

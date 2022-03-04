@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<uni-card title="收货地址">
-			<view class="vertical-center address">
+			<view class="vertical-center address" @click="chooseAddress">
 				<uni-icons type="home-filled" size="26"></uni-icons>
 				<uni-icons type="right"></uni-icons>
 			</view>
@@ -47,10 +47,13 @@
 				return this.cartList.map(item => item).filter(item => item.isSelected)
 			}
 		},
-		beforeMount() {
-			console.log(this.selectedGood)
+		methods: {
+			chooseAddress() {
+				this.$Router.push({
+					name: 'address'
+				})
+			}
 		}
-	
 	}
 </script>
 

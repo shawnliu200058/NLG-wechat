@@ -7,7 +7,9 @@
     "pages/publish/publish",
     "pages/goodDetail/goodDetail",
     "pages/cart/cart",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/address/address",
+    "pages/editAddress/editAddress"
   ],
   "subPackages": [],
   "window": {

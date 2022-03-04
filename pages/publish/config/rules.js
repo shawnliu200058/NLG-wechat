@@ -42,7 +42,7 @@ export default {
 				validateFunction:function(rule,value,data,callback){
 					console.log(value)
 					if (value < 1) {
-							callback('商品价格必须大于 1')
+						callback('商品价格必须大于 1')
 				  }
 				return true
 			  }

@@ -17,7 +17,7 @@
 					<text>快递配送</text>
 				</view>
 				<view>
-					<text style="margin-right: 10rpx;">销量：</text>
+					<text style="margin-right: 10rpx;">销量：{{goodInfo.sale}}</text>
 					<text>库存: {{goodInfo.stock}}</text>
 				</view>
 			</view>

@@ -35,6 +35,9 @@
 				default: '105'
 			}
 		},
+		// beforeMount() {
+		// 	console.log(this.totalPrice)
+		// },
 		computed: {
 			...mapGetters(['totalPrice']),
 			cssVars() {
@@ -47,10 +50,10 @@
 </script>
 
 <style scoped lang="scss">
-	.container {
-		position: fixed;
-		width: 100%;
-		bottom: var(--bottom);
+	// .container {
+	// 	position: fixed;
+	// 	width: 100%;
+	// 	bottom: var(--bottom);
 		
 		.content {
 			padding-left: 20rpx;
@@ -58,5 +61,5 @@
 			height: 80rpx;
 			border-top: 1px solid $uni-bg-color-grey;
 		}
-	}
+	// }
 </style>
