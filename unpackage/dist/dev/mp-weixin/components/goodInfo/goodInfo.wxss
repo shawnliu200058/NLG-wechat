@@ -31,10 +31,6 @@
   align-items: center;
   padding-top: 20rpx;
 }
-.container image.data-v-0d8ad664 {
-  width: 200rpx;
-  height: 200rpx;
-}
 .container .common-padding.data-v-0d8ad664 {
   padding-bottom: 10rpx;
 }

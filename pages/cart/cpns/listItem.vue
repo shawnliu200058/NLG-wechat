@@ -1,14 +1,32 @@
 <template>
 	<view class="container">
 		<uni-card>
-			<good-info :item="item">
+			<!-- <good-info :item="item">
 				<template #checkbox>
 					<cart-checkbox :isSelect="item.isSelected" @click.native="isSelectGood(item.id, item.isSelected)"></cart-checkbox>
+				</template>
+				<template #img>
+					<image :src="item.displayPicUrl" mode="aspectFill"></image>
 				</template>
 				<template #number-box>
 					<uni-number-box :min="1" v-model="item.count" @change="countChange"></uni-number-box>
 				</template>
-			</good-info>
+			</good-info> -->
+			<view class="vertical-center">
+				<three-column>
+					<template #column1>
+						<cart-checkbox :isSelect="item.isSelected" @click.native="isSelectGood(item.id, item.isSelected)"></cart-checkbox>
+					</template>
+					<template #column2>
+						<image :src="item.displayPicUrl" mode="aspectFill"></image>
+					</template>
+					<template #column3>
+						<view>{{item.name}}</view>
+						<uni-title :title="`￥${item.price.toFixed(2)}/${item.unit}`" type="h4" color="red"></uni-title>
+						<uni-number-box :min="1" v-model="item.count" @change="countChange"></uni-number-box>
+					</template>
+				</three-column>
+			</view>
 		</uni-card>
 	</view>
 </template>
@@ -25,6 +43,7 @@
 	
 	import CartCheckbox from '@/components/checkbox/cartCheckbox.vue'
 	import GoodInfo from '@/components/goodInfo/goodInfo.vue'
+	import ThreeColumn from '@/layout/three-column/three-column.vue'
 	
 	export default {
 		props: {
@@ -35,7 +54,8 @@
 		},
 		components: {
 			CartCheckbox,
-			GoodInfo
+			GoodInfo,
+			ThreeColumn
 		},
 		methods: {
 			...mapMutations({
@@ -57,18 +77,15 @@
 </script>
 
 <style scoped lang="scss">
-	.good-content {
-		display: grid;
-		grid-template-columns: 1fr 2fr 7fr;
-		grid-column-gap: 20rpx;
-		align-items: center;
-		padding-top: 20rpx;
-		
-		.good-item {
-			
-		}
+	.container {
+		// display: grid;
+		// grid-template-columns: 2fr 3fr 5fr;
+		// grid-column-gap: 20rpx;
+		// align-items: center;
+		// padding-top: 20rpx;
 		
 		image {
+			margin: 0 20rpx;
 			width: 200rpx;
 			height: 200rpx;
 		}

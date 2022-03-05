@@ -18,7 +18,6 @@ export default {
 			},
 			{
 				validateFunction:function(rule,value,data,callback){
-					console.log(value)
 					if(RegExp(/^1[34578]\d{9}$/).test(value)) return true
 					else callback('手机格式错误')
 			  }

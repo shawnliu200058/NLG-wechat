@@ -33,7 +33,8 @@ const actions = {
 		const { userInfo, openid } = user
 		return new Promise((resolve, reject) => {
 			createUser(user).then(res => {
-				const {id} = res.data.user
+				const { id } = res.data.user
+				console.log(id)
 				commit('SET_ID', id)
 				commit('SET_OPENID', openid)
 				const { nickName, gender, avatarUrl } = userInfo

@@ -29,4 +29,18 @@
 		display: flex;
 		align-items: center;
 	}
+	
+	// 向左对齐
+	.left-align {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+	
+	// 向右对齐
+	.right-align {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+	}
 </style>

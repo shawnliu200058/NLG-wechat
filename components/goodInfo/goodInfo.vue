@@ -1,16 +1,19 @@
 <template>
-		<view class="container">
-			<view class="vertical-center">
-				<slot name="checkbox"></slot>
-				<image :src="item.displayPicUrl" mode="aspectFill"></image>
-			</view>
-			<view class="good-item">
+	<view class="container">
+		<view class="vertical-center">
+			<slot name="checkbox"></slot>
+			<!-- <image :src="item.displayPicUrl" mode="aspectFill"></image> -->
+			<slot name="img"></slot>
+		</view>
+		<view class="good-item">
+			<slot name="mainInfo">
 				<view class="common-padding">{{item.name}}</view>
 				<uni-title :title="`￥${item.price.toFixed(2)}/${item.unit}`" type="h4" color="red"></uni-title>
-				<slot name="count"></slot>
-				<slot name="number-box"></slot>
-			</view>
+			</slot>
+			<slot name="count"></slot>
+			<slot name="number-box"></slot>
 		</view>
+	</view>
 </template>
 
 <script>
@@ -31,20 +34,19 @@
 		grid-column-gap: 20rpx;
 		align-items: center;
 		padding-top: 20rpx;
-		
-		.good-item {
-			
-		}
-		
-		image {
-			width: 200rpx;
-			height: 200rpx;
-		}
-		
+
+		.good-item {}
+
+		// image {
+		// 	margin: 0 20rpx;
+		// 	width: 200rpx;
+		// 	height: 200rpx;
+		// }
+
 		.common-padding {
 			padding-bottom: 10rpx;
 		}
-		
+
 		.stock {
 			font-size: 12px;
 			color: $uni-text-color-grey;

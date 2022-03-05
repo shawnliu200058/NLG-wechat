@@ -1,12 +1,13 @@
 <template>
 	<view class="container center">
-		<!-- <view class="btn center" @click="editAddress">新增地址</view> -->
+		<address-info></address-info>
 		<circle-btn text="新增地址" class="btn" @click.native="editAddress"></circle-btn>
 	</view>
 </template>
 
 <script>
 	import CircleBtn from '@/components/circle-btn/circle-btn.vue'
+	import AddressInfo from './cpns/addressInfo.vue'
 	
 	export default {
 		data() {
@@ -15,7 +16,8 @@
 			}
 		},
 		components: {
-			CircleBtn
+			CircleBtn,
+			AddressInfo
 		},
 		methods: {
 			editAddress() {

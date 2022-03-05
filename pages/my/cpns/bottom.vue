@@ -1,7 +1,10 @@
 <template>
 	<view class="">
 		<uni-list v-for="(item, index) in listItems" :key="index">
-			<uni-list-item :title="item.title" show-extra-icon :extraIcon="item.extraIcon"></uni-list-item>
+			<view @click="goToPage(index)">
+				<uni-list-item :title="item.title" show-extra-icon
+				:extraIcon="item.extraIcon"></uni-list-item>
+			</view>
 		</uni-list>
 	</view>
 </template>
@@ -31,6 +34,13 @@
 				}]
 			}
 		},
+		methods: {
+			goToPage(index) {
+				if(index == 0) this.$Router.push({
+					name: 'address'
+				})
+			}
+		}
 	}
 </script>
 

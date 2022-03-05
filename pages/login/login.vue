@@ -55,16 +55,19 @@
 										&secret=${APP_SECRET}
 										&js_code=${res.code}
 										&grant_type=authorization_code`
+										
 								uni.request({
 									url, // 请求路径
 									success: result => {
 										const { openid } = result.data
+										
+										console.log(openid)
 
 										that.login({userInfo, openid}).then(res => {
 											console.log(res)
 											that.$Router.back(1, {
 											  success:(...arg)=>{
-											    console.log(arg)
+													
 											  }
 											})
 											uni.showToast({
@@ -72,6 +75,9 @@
 											})
 										})
 									},
+									fail: (err) => {
+										console.log(err)
+									}
 								});
 							}
 						});

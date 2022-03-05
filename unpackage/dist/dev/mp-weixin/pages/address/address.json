@@ -2,6 +2,7 @@
   "navigationBarTitleText": "收货地址",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "circle-btn": "/components/circle-btn/circle-btn"
+    "circle-btn": "/components/circle-btn/circle-btn",
+    "address-info": "/pages/address/cpns/addressInfo"
   }
 }
