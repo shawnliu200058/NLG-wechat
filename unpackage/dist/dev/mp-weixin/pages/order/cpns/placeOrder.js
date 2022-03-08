@@ -189,6 +189,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
 var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _createNamespacedHelp =
 
 
@@ -232,20 +234,38 @@ var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumera
   beforeMount: function beforeMount() {
     // console.log([this.unpaidGood])
   },
-  methods: _objectSpread(_objectSpread({},
-  mapActions(['placeOrder'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({},
+  mapActions(['placeOrder'])),
+  (0, _vuex.mapMutations)({
+    clearCartList: 'cart/CLEAR_CART_LIST',
+    clearUnpaidGood: 'unpaidOrder/CLEAR_UNPAID_GOOD' })), {}, {
+
     chooseAddress: function chooseAddress() {
       this.$Router.push({
         name: 'address' });
 
     },
-    pay: function pay() {
-      this.placeOrder({
-        deliveryAddress: this.addressData,
-        goodList: this.selectedGood,
-        totalPrice: this.orderPrice,
-        remark: this.remark });
+    pay: function pay() {var _this = this;
+      if (this.addressData) {
+        var goodList = this.selectedGood;
+        goodList.forEach(function (item) {
+          delete item.detailPic;
+        });
 
+        this.placeOrder({
+          deliveryAddress: this.addressData,
+          goodList: goodList,
+          totalPrice: this.orderPrice,
+          remark: this.remark }).
+        then(function (res) {
+          // 支付成功后清空购物车和订单页信息
+          _this.clearCartList();
+          _this.clearUnpaidGood();
+          _this.$Router.push({
+            name: 'paymentSucceeded' });
+
+        });
+      }
     } }) };exports.default = _default;
 
 /***/ }),

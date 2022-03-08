@@ -1,6 +1,6 @@
 <template>
 	<view class="container center">
-		<view class="btn center">{{text}}</view>
+		<view class="btn center" :style="{'--bgColor': bgColor}">{{text}}</view>
 	</view>
 </template>
 
@@ -10,6 +10,10 @@
 			text: {
 				type: String,
 				default: ''
+			},
+			bgColor: {
+				type: String,
+				default: '#0bd667'
 			}
 		},
 		data() {
@@ -29,7 +33,7 @@
 		padding: 20rpx 280rpx;
 		border-radius: 40rpx;
 		color: #F8F8F8;
-		background-color: #0bd667;
+		background-color: var(--bgColor);
 	}
 }
 </style>

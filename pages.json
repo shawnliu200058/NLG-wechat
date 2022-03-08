@@ -1,4 +1,9 @@
 {
+	"easycom": {
+		// npm安装的方式不需要前面的"@/"，下载安装的方式需要"@/"
+		// npm安装方式
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
@@ -80,6 +85,19 @@
 			"style": {
 				"navigationBarTitleText": "我的订单",
 				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/paymentSucceeded/paymentSucceeded",
+			"name": "paymentSucceeded",
+			"style": {
+				"navigationBarTitleText": "支付成功",
+				"enablePullDownRefresh": false,
+				"app-plus": { //uni-app项目对应节点名称为"app-plus"
+					"titleNView": {
+						"autoBackButton": false
+					}
+				}
 			}
 
 		}

@@ -32,10 +32,16 @@
   width: 200rpx;
   height: 200rpx;
 }
+.container .fixedSpace.data-v-1ff0ce4c {
+  width: 100%;
+  height: 100rpx;
+}
 .container .fixedFooter.data-v-1ff0ce4c {
   position: fixed;
   width: 100%;
   bottom: 0;
+  z-index: 999;
+  background-color: #f8f8f8;
 }
 .container .fixedFooter .btn.data-v-1ff0ce4c {
   width: 25%;

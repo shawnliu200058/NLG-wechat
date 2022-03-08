@@ -140,17 +140,11 @@ var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumera
       nickName: null };
 
   },
-  computed: _objectSpread(_objectSpread({},
+  computed: _objectSpread({},
   (0, _vuex.mapGetters)({
     nick_name: 'nickName',
-    avatar_url: 'avatarUrl' })), {}, {
+    avatar_url: 'avatarUrl' })),
 
-    name: function name() {
-      return this.nick_name;
-    },
-    url: function url() {
-      return this.avatar_url;
-    } }),
 
   methods: {} };exports.default = _default;
 

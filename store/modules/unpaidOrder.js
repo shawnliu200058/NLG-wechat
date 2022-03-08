@@ -10,6 +10,7 @@ const mutations = {
 	},
 	CLEAR_UNPAID_GOOD: (state) => {
 		state.unpaidGood = null
+		state.unpaidPrice = 0
 	}
 }
 

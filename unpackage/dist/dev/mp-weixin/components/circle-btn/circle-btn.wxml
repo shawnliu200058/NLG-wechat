@@ -1,1 +1,1 @@
-<view class="container center data-v-1ecb5b38"><view class="btn center data-v-1ecb5b38">{{text}}</view></view>
+<view class="container center data-v-1ecb5b38"><view class="btn center data-v-1ecb5b38" style="{{'--bg-color:'+(bgColor)+';'}}">{{text}}</view></view>

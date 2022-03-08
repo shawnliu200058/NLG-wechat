@@ -143,7 +143,6 @@ var _default =
       default: '105' },
 
     orderPrice: {
-      type: String,
       required: true } },
 
 

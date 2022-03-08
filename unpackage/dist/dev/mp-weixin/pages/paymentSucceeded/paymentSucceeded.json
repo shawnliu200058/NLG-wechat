@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "支付成功",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "uni-title": "/uni_modules/uni-title/components/uni-title/uni-title",
+    "circle-btn": "/components/circle-btn/circle-btn"
+  }
+}

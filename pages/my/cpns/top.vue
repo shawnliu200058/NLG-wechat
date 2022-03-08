@@ -1,9 +1,9 @@
 <template>
 	<view class="container"  @click="$Router.push({name: 'login'})">
-		<image :src="url ? url
+		<image :src="avatar_url ? avatar_url
 			: '../../../static/avatar/mmexport02d1443711db4c6508cc18aca6ebf25f.png'" mode=""></image>
 		<!-- <image @click="a" src="../../../static/avatar/mmexport02d1443711db4c6508cc18aca6ebf25f.png" mode=""></image> -->
-		<text>{{name ? name : '请先登录'}}</text>
+		<text>{{nick_name ? nick_name : '请先登录'}}</text>
 	</view>
 </template>
 
@@ -21,13 +21,7 @@
 			...mapGetters({
 			  nick_name: 'nickName',
 				avatar_url: 'avatarUrl'
-			}),
-			name: function() {
-				return this.nick_name
-			},
-			url: function() {
-				return this.avatar_url
-			}
+			})
 		},
 		methods: {}
 	}

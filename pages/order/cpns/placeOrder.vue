@@ -35,6 +35,8 @@
 			</view>
 		</uni-card>
 
+		<view class="fixedSpace"></view>
+
 		<common-footer bottom="0" class="fixedFooter" :orderPrice="orderPrice">
 			<template #btn>
 				<view class="btn center" @click="pay">付款</view>
@@ -45,7 +47,7 @@
 
 <script>
 	import {
-		mapGetters, mapState, createNamespacedHelpers
+		mapGetters, mapState, mapMutations, createNamespacedHelpers
 	} from 'vuex'
 	const { mapActions } = createNamespacedHelpers('paidOrder')
 
@@ -89,18 +91,36 @@
 		},
 		methods: {
 			...mapActions(['placeOrder']),
+			...mapMutations({
+				clearCartList: 'cart/CLEAR_CART_LIST',
+				clearUnpaidGood: 'unpaidOrder/CLEAR_UNPAID_GOOD'
+			}),
 			chooseAddress() {
 				this.$Router.push({
 					name: 'address'
 				})
 			},
-			pay() {
-				this.placeOrder({
-					deliveryAddress: this.addressData,
-					goodList: this.selectedGood,
-					totalPrice: this.orderPrice,
-					remark: this.remark
-				})
+			pay() {				
+				if(this.addressData) {
+					let goodList = this.selectedGood
+					goodList.forEach(item => {
+						delete item.detailPic
+					})
+					
+					this.placeOrder({
+						deliveryAddress: this.addressData,
+						goodList,
+						totalPrice: this.orderPrice,
+						remark: this.remark
+					}).then(res => {
+						// 支付成功后清空购物车和订单页信息
+						this.clearCartList()
+						this.clearUnpaidGood()
+						this.$Router.push({
+							name: 'paymentSucceeded'
+						})
+					})
+				}
 			}
 		}
 	}
@@ -108,6 +128,7 @@
 
 <style scoped lang="scss">
 	.container {
+
 		.address {
 			justify-content: space-between;
 		}
@@ -117,11 +138,18 @@
 			width: 200rpx;
 			height: 200rpx;
 		}
+		
+		.fixedSpace {
+			width: 100%;
+			height: 100rpx;
+		}
 
 		.fixedFooter {
 			position: fixed;
 			width: 100%;
 			bottom: 0;
+			z-index: 999;
+			background-color: $uni-bg-color-grey;
 
 			.btn {
 				width: 25%;

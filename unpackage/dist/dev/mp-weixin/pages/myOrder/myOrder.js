@@ -1,6 +1,6 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/myOrder/myOrder"],{
 
-/***/ 511:
+/***/ 515:
 /*!***********************************************************************************!*\
   !*** D:/HBuilderProjects/NLG_wechat/main.js?{"page":"pages%2FmyOrder%2FmyOrder"} ***!
   \***********************************************************************************/
@@ -10,13 +10,13 @@
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 5);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));
-var _myOrder = _interopRequireDefault(__webpack_require__(/*! ./pages/myOrder/myOrder.vue */ 512));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
+var _myOrder = _interopRequireDefault(__webpack_require__(/*! ./pages/myOrder/myOrder.vue */ 516));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 createPage(_myOrder.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
 
-/***/ 512:
+/***/ 516:
 /*!****************************************************************!*\
   !*** D:/HBuilderProjects/NLG_wechat/pages/myOrder/myOrder.vue ***!
   \****************************************************************/
@@ -25,7 +25,7 @@ createPage(_myOrder.default);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _myOrder_vue_vue_type_template_id_b7c9a9e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myOrder.vue?vue&type=template&id=b7c9a9e8& */ 514);
+/* harmony import */ var _myOrder_vue_vue_type_template_id_b7c9a9e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myOrder.vue?vue&type=template&id=b7c9a9e8& */ 517);
 /* harmony import */ var _myOrder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./myOrder.vue?vue&type=script&lang=js& */ 519);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _myOrder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _myOrder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 11);
@@ -55,7 +55,7 @@ component.options.__file = "pages/myOrder/myOrder.vue"
 
 /***/ }),
 
-/***/ 514:
+/***/ 517:
 /*!***********************************************************************************************!*\
   !*** D:/HBuilderProjects/NLG_wechat/pages/myOrder/myOrder.vue?vue&type=template&id=b7c9a9e8& ***!
   \***********************************************************************************************/
@@ -91,6 +91,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uniCollapse: function() {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse/uni-collapse */ "uni_modules/uni-collapse/components/uni-collapse/uni-collapse").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue */ 532))
+    },
+    uniCollapseItem: function() {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item */ "uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue */ 539))
+    },
+    uniIcons: function() {
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 170))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -134,6 +163,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -141,9 +178,13 @@ var _default =
 
 
   },
+  onBackPress: function onBackPress(e) {
+    console.log(e);
+    return true;
+  },
   methods: {} };exports.default = _default;
 
 /***/ })
 
-},[[511,"common/runtime","common/vendor"]]]);
+},[[515,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/myOrder/myOrder.js.map

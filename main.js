@@ -3,11 +3,14 @@ import App from './App'
 import '.env.js'
 import store, {retriveData} from './store'
 import {router,RouterMount} from './router.js'
- 
+import uView from 'uview-ui';
+
  // console.log(ROUTES)
 // #ifndef VUE3
 import Vue from 'vue'
-Vue.use(router)
+Vue.use(router) 
+
+Vue.use(uView);
 
 Vue.prototype.$store = store
 Vue.config.productionTip = false

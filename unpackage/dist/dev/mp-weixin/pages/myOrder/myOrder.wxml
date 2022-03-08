@@ -1,1 +1,1 @@
-<view>123</view>
+<view><uni-collapse vue-id="416a910c-1" bind:__l="__l" vue-slots="{{['default']}}"><uni-collapse-item vue-id="{{('416a910c-2')+','+('416a910c-1')}}" title="折叠内容" bind:__l="__l" vue-slots="{{['default']}}"><text>折叠内容</text><uni-icons vue-id="{{('416a910c-3')+','+('416a910c-2')}}" type="checkbox" bind:__l="__l"></uni-icons></uni-collapse-item><uni-collapse-item vue-id="{{('416a910c-4')+','+('416a910c-1')}}" title="禁用状态" disabled="{{true}}" bind:__l="__l" vue-slots="{{['default']}}"><text>折叠内容</text></uni-collapse-item></uni-collapse></view>

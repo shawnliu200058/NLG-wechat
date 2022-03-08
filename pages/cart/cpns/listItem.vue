@@ -1,17 +1,6 @@
 <template>
 	<view class="container">
 		<uni-card>
-			<!-- <good-info :item="item">
-				<template #checkbox>
-					<cart-checkbox :isSelect="item.isSelected" @click.native="isSelectGood(item.id, item.isSelected)"></cart-checkbox>
-				</template>
-				<template #img>
-					<image :src="item.displayPicUrl" mode="aspectFill"></image>
-				</template>
-				<template #number-box>
-					<uni-number-box :min="1" v-model="item.count" @change="countChange"></uni-number-box>
-				</template>
-			</good-info> -->
 			<view class="vertical-center">
 				<three-column>
 					<template #column1>
@@ -31,11 +20,9 @@
 	</view>
 </template>
 
-
-
 <script>
 	import {
-		createNamespacedHelpers
+		createNamespacedHelpers, mapGetters
 	} from 'vuex'
 	const {
 		mapMutations

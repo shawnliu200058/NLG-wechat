@@ -19,8 +19,9 @@ const mutations = {
 			for(let i in state.list) {
 				// 新加入的商品原数组中已有，只需更新数量
 				if(state.list[i].id === goodInfo.id) {
-					console.log(state.list[i].count, '+', count)
 					state.list[i].count += count
+					// 强制更新购物车 numberBox 数据
+					Vue.set(state.list, i, state.list[i])
 					break
 				}
 				// 新加入的商品原数组中没有，直接插入数组
@@ -115,6 +116,12 @@ const mutations = {
 			if(item.isSelected) state.totalPrice += item.price * item.count
 		})
 		if(!Number.isInteger(state.totalPrice)) state.totalPrice = state.totalPrice.toFixed(2)
+	},
+	CLEAR_CART_LIST(state) {
+		state.list.length = 0
+		state.goodsCount = 0,
+		state.isSelectAll = true,
+		state.totalPrice = 0
 	}
 }
 

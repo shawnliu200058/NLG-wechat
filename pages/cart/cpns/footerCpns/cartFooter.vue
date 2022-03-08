@@ -114,10 +114,6 @@
 
 <style scoped lang="scss">
 	.container {
-		position: fixed;
-		width: 100%;
-		// bottom: 0;
-		bottom: 100rpx;
 
 		.content {
 			padding-left: 20rpx;

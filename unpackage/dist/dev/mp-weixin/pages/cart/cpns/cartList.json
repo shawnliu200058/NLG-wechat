@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
+    "u-empty": "/node-modules/uview-ui/components/u-empty/u-empty",
     "list-item": "/pages/cart/cpns/listItem"
   }
 }
