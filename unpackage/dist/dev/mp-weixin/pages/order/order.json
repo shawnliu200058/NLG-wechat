@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "确认订单",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "place-order": "/pages/order/cpns/placeOrder"

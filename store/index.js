@@ -25,6 +25,7 @@ const store = new Vuex.Store({
 export function retriveData() {
 	store.dispatch('category/getCategoryList')
 	store.dispatch('good/getGoodList')
+	store.dispatch('address/getAddress')
 }
 
 export default store

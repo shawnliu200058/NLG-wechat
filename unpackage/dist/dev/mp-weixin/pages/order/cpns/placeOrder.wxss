@@ -27,6 +27,11 @@
 .container .address.data-v-1ff0ce4c {
   justify-content: space-between;
 }
+.container image.data-v-1ff0ce4c {
+  margin: 0 20rpx;
+  width: 200rpx;
+  height: 200rpx;
+}
 .container .fixedFooter.data-v-1ff0ce4c {
   position: fixed;
   width: 100%;

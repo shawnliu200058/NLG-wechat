@@ -12,7 +12,11 @@ const getters = {
 	// 是否全选购物车的商品
 	isSelectAll: state => state.cart.isSelectAll,
 	// 选中商品总价
-	totalPrice: state => state.cart.totalPrice
+	totalPrice: state => state.cart.totalPrice,
+	// 收货人地址信息
+	addressInfo: state => state.address.addressInfo,
+	// 下订单时所选中的地址
+	selectedAddress: state => state.address.selectedAddress
 }
 
 export default getters

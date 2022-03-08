@@ -9,7 +9,8 @@
     "pages/cart/cart",
     "pages/order/order",
     "pages/address/address",
-    "pages/editAddress/editAddress"
+    "pages/editAddress/editAddress",
+    "pages/myOrder/myOrder"
   ],
   "subPackages": [],
   "window": {

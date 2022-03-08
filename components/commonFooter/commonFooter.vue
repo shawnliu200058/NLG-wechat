@@ -11,7 +11,7 @@
 			</view> -->
 			<slot name="checkbox"></slot>
 			
-			<view>合计:￥{{totalPrice}}</view>
+			<view>合计:￥{{orderPrice}}</view>
 			<!-- <view v-if="goodsCountInCart" :style="cssVars" class="btn btn-green center" @click="handleCart">{{rightText}}({{goodsCountInCart}})</view>
 			<view v-else class="btn btn-grey center">{{rightText}}</view> -->
 			<slot name="btn"></slot>
@@ -20,26 +20,21 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
-	import {
-		createNamespacedHelpers
-	} from 'vuex'
-	const {
-		mapMutations
-	} = createNamespacedHelpers('cart')
-	
 	export default {
 		props: {
 			bottom: {
 				type: String,
 				default: '105'
+			},
+			orderPrice: {
+				type: String,
+				required: true
 			}
 		},
 		// beforeMount() {
 		// 	console.log(this.totalPrice)
 		// },
 		computed: {
-			...mapGetters(['totalPrice']),
 			cssVars() {
 				return {
 					'--bottom': this.bottom + 'rpx'

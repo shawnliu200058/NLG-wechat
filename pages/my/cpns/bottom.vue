@@ -20,10 +20,10 @@
 						type: 'location'
 					}
 				}, {
-					title: '我的供应',
+					title: '我的订单',
 					extraIcon: {
 						size: '20',
-						type: 'bars'
+						type: 'list'
 					}
 				}, {
 					title: '系统设置',
@@ -36,9 +36,18 @@
 		},
 		methods: {
 			goToPage(index) {
-				if(index == 0) this.$Router.push({
-					name: 'address'
-				})
+				if(index == 0) {
+					this.$Router.push({
+						path: '/pages/address/address',
+						query: {
+							entrance: 'my'
+						}
+					})
+				} else if(index == 1) {
+					this.$Router.push({
+						name: 'myOrder'
+					})
+				}
 			}
 		}
 	}

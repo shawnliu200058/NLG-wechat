@@ -26,7 +26,7 @@
 /* 文章场景相关 */
 .container.data-v-1b2091b8 {
   display: grid;
-  grid-template-columns: 1fr 3fr 6fr;
+  grid-template-columns: var(--division);
   grid-column-gap: 20rpx;
   align-items: center;
   width: 600rpx;

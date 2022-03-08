@@ -18,7 +18,7 @@
 						<cart-checkbox :isSelect="item.isSelected" @click.native="isSelectGood(item.id, item.isSelected)"></cart-checkbox>
 					</template>
 					<template #column2>
-						<image :src="item.displayPicUrl" mode="aspectFill"></image>
+						<image v-if="item.displayPicUrl" :src="item.displayPicUrl" mode="aspectFill"></image>
 					</template>
 					<template #column3>
 						<view>{{item.name}}</view>

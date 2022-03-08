@@ -1,1 +1,1 @@
-<view class="container data-v-1b2091b8"><view class="column1 data-v-1b2091b8"><slot name="column1"></slot></view><view class="column2 data-v-1b2091b8"><slot name="column2"></slot></view><view class="column3 data-v-1b2091b8"><slot name="column3"></slot></view></view>
+<view class="container data-v-1b2091b8" style="{{(styleVars)}}"><view class="column1 data-v-1b2091b8"><slot name="column1"></slot></view><view class="column2 data-v-1b2091b8"><slot name="column2"></slot></view><view class="column3 data-v-1b2091b8"><slot name="column3"></slot></view></view>

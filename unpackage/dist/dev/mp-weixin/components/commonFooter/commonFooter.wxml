@@ -1,1 +1,1 @@
-<view class="container data-v-56ab2344"><view class="content vertical-center data-v-56ab2344" style="{{(cssVars)}}"><slot name="checkbox"></slot><view class="data-v-56ab2344">{{"合计:￥"+totalPrice}}</view><slot name="btn"></slot></view></view>
+<view class="container data-v-56ab2344"><view class="content vertical-center data-v-56ab2344" style="{{(cssVars)}}"><slot name="checkbox"></slot><view class="data-v-56ab2344">{{"合计:￥"+orderPrice}}</view><slot name="btn"></slot></view></view>

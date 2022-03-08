@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "农乐购",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "top": "/pages/my/cpns/top",

@@ -25,7 +25,7 @@
 			"path": "pages/my/my",
 			"name": "my",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "农乐购",
 				"enablePullDownRefresh": false
 			}
 		}, {
@@ -56,7 +56,7 @@
 			"path": "pages/order/order",
 			"name": "order",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "确认订单",
 				"enablePullDownRefresh": false
 			}
 
@@ -72,6 +72,13 @@
 			"name": "editAddress",
 			"style": {
 				"navigationBarTitleText": "地址编辑",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myOrder/myOrder",
+			"name": "myOrder",
+			"style": {
+				"navigationBarTitleText": "我的订单",
 				"enablePullDownRefresh": false
 			}
 
@@ -112,5 +119,13 @@
 				"text": "我的"
 			}
 		]
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
 	}
 }

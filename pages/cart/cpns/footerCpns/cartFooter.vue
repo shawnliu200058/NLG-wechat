@@ -116,8 +116,8 @@
 	.container {
 		position: fixed;
 		width: 100%;
-		bottom: 0;
-		// bottom: 105rpx;
+		// bottom: 0;
+		bottom: 100rpx;
 
 		.content {
 			padding-left: 20rpx;
@@ -132,8 +132,8 @@
 			}
 
 			.btn-green {
-				// background-color: var(--bgColor);
-				background-color: #00dc00;
+				background-color: var(--bgColor);
+				// background-color: #00dc00;
 			}
 
 			.btn-grey {

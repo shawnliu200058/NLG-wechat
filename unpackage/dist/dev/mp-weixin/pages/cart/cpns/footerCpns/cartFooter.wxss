@@ -27,7 +27,7 @@
 .container.data-v-7236e506 {
   position: fixed;
   width: 100%;
-  bottom: 0;
+  bottom: 100rpx;
 }
 .container .content.data-v-7236e506 {
   padding-left: 20rpx;
@@ -41,7 +41,7 @@
   color: #F8F8F8;
 }
 .container .content .btn-green.data-v-7236e506 {
-  background-color: #00dc00;
+  background-color: var(--bgColor);
 }
 .container .content .btn-grey.data-v-7236e506 {
   background-color: #bfd1c5;

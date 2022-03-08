@@ -26,13 +26,16 @@
 					<uni-easyinput v-model="formData.house" placeholder="请输入楼栋门牌号"></uni-easyinput>
 				</uni-forms-item>
 				<uni-forms-item label="默认地址" name="isDefault">
-					<switch @change="chooseDefault"></switch>
+					<switch @change="chooseDefault" :checked="formData.isDefault === 1 ? true : false"></switch>
 				</uni-forms-item>
 			</uni-forms> 
 		</view>
 		
-		<view class="center saveAndUse" @click="submit">
-			<circle-btn text="保存并使用"></circle-btn>
+		<view class="saveAndUse">
+			<circle-btn text="保存" @click.native="submit"></circle-btn>
+			<view>
+				<circle-btn v-if="showDelBtn" text="删除" @click.native="deleteAddress"></circle-btn>
+			</view>
 		</view>
 	</view>
 </template>
@@ -48,6 +51,7 @@
 	import InputBox from '@/components/input-box/input-box.vue'
 	import CircleBtn from '@/components/circle-btn/circle-btn.vue'
 	import rules from './config/rules.js'
+	import { showToastBack } from './hook.js'
 	
 	export default {
 		data() {
@@ -59,22 +63,31 @@
 					house: '',
 					isDefault: 0
 				},
+				showDelBtn: false
 			}
 		},
 		components: {
 			CircleBtn
 		},
 		computed: {
-			...mapGetters(['userId'])
+			...mapGetters(['userId', 'addressInfo'])
 		},
 		onReady() {
 			this.$refs.form.setRules(rules)
 		},
-		beforeMount() {
-			console.log(this.userId)
+		onLoad() {
+			this.getEchoData()
+			this.showDelBtn = this.$Route.query.type == 0 ? true : false
 		},
 		methods: {
-			...mapActions(['addAddress']),
+			...mapActions(['addAddress', 'modifyAddress', 'delAddress']),
+			getEchoData() {
+				if(this.$Route.query.addressId) {
+					// 找到该 id 对应的地址
+					const addressData = this.addressInfo.find(item => item.id == this.$Route.query.addressId)
+					for(const key in this.formData) this.formData[key] = addressData[key]
+				}
+			},
 			chooseDefault(e) {
 				if(e.target.value) this.formData.isDefault = 1
 				else this.formData.isDefault = 0
@@ -82,26 +95,50 @@
 			submit() {
 				this.$refs.form.validate().then(res => {
 					// console.log(res)
-					this.formData.user_id = this.userId
-					this.addAddress(this.formData).then(res => {
-						console.log(res)
-						uni.showToast({
-							title: '保存成功',
-							icon: 'success'
+					// this.formData.user_id = 6
+					// 新增
+					console.log(this.$Route.query.type)
+					if(!this.showDelBtn) {
+						this.addAddress({
+							addressInfo: this.formData,
+							userId: this.userId
+						}).then(res => {
+							showToastBack(uni, '新建成功', this)
 						})
-						this.$Router.push({
-							name: 'editAddress'
+					} else { // 编辑
+						this.modifyAddress({
+							addressInfo: this.formData,
+							addressId: this.$Route.query.addressId
+						}).then(res => {
+							showToastBack(uni, '编辑成功', this)
 						})
-					})
+					}
 				})
 			},
 			chooseLocation() {
 				uni.chooseLocation({
 					success: (res) => {
-						// console.log(res)
+						console.log(res)
 						this.formData.address = res.address
 					}
 				})
+			},
+			deleteAddress() {
+				const { addressId } = this.$Route.query
+				
+				uni.showModal({
+					content: '是否删除',
+					success: res => {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							this.delAddress(addressId).then(res => {
+								showToastBack(uni, '删除成功', this)
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
 			}
 		},
 		

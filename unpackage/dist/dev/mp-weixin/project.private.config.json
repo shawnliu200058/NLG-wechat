@@ -67,8 +67,8 @@
           "name": "地址编辑",
           "pathName": "pages/editAddress/editAddress",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
@@ -86,7 +86,7 @@
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
+    "compileHotReLoad": true,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "babelSetting": {

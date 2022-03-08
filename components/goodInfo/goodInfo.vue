@@ -2,7 +2,6 @@
 	<view class="container">
 		<view class="vertical-center">
 			<slot name="checkbox"></slot>
-			<!-- <image :src="item.displayPicUrl" mode="aspectFill"></image> -->
 			<slot name="img"></slot>
 		</view>
 		<view class="good-item">

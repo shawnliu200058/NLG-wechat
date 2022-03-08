@@ -1,33 +1,62 @@
-import { addDeliveryAddress, getDeliveryAddress } from '../../api/address.js'
+import {
+	addDeliveryAddress,
+	getDeliveryAddress,
+	modifyDeliveryAddress,
+	delDeliveryAddress
+} from '../../api/address.js'
 
 const state = {
-	addressInfo: []
+	addressInfo: [],
+	selectedAddress: null
 }
 
 const mutations = {
 	SET_ADDRESS_INFO(state, info) {
-		// 新加入的地址不为默认地址
-		// if(!info.isDefault || !state.addressInfo.length) state.addressInfo.push(info)
-		// else {
-		// 	for(let item of state.addressInfo) {
-		// 		// 若之前的地址为默认地址，则需要取消
-		// 		if(item.isDefault) {
-		// 			item.isDefault = 0
-		// 			state.addressInfo.push(info)
-		// 			break
-		// 		}
-		// 	}
-		// }
 		state.addressInfo = info
+	},
+	SET_SELECTED_ADDRESS(state, info = null) {
+		state.selectedAddress = info
 	}
 }
 
 const actions = {
 	addAddress({ commit }, info) {
-		console.log(info)
+		const {
+			addressInfo,
+			userId
+		} = info
 		return new Promise((resolve, reject) => {
-			addDeliveryAddress(info).then(res => {
-				// info.id = res.data.insertId
+			addDeliveryAddress(addressInfo, userId).then(res => {
+
+				getDeliveryAddress().then(res => {
+					console.log(res.data)
+					commit('SET_ADDRESS_INFO', res.data)
+				})
+
+				resolve(res)
+			}).catch(err => {
+				reject(err)
+			})
+		})
+	},
+	getAddress({ commit }) {
+		return new Promise((resolve, reject) => {
+			getDeliveryAddress().then(res => {
+				commit('SET_ADDRESS_INFO', res.data)
+				resolve(res)
+			}).catch(err => {
+				reject(err)
+			})
+		})
+	},
+	modifyAddress({ commit }, info) {
+		console.log(info)
+		const {
+			addressInfo,
+			addressId
+		} = info
+		return new Promise((resolve, reject) => {
+			modifyDeliveryAddress(addressInfo, addressId).then(res => {
 				
 				getDeliveryAddress().then(res => {
 					console.log(res.data)
@@ -39,6 +68,30 @@ const actions = {
 				reject(err)
 			})
 		})
+	},
+	delAddress({ commit }, addressId) {
+		console.log(addressId)
+		return new Promise((resolve, reject) => {
+			delDeliveryAddress(addressId).then(res => {
+				console.log(res) 
+				
+				getDeliveryAddress().then(res => {
+					console.log(res.data)
+					commit('SET_ADDRESS_INFO', res.data)
+				})
+				
+				resolve(res)
+			}).catch(err => {
+				reject(err)
+			})
+		})
+	},
+	selectAddress({ commit }, addressId) {
+		const selectedAddress = state.addressInfo.find(item => item.id == addressId)
+		commit('SET_SELECTED_ADDRESS', selectedAddress)
+	},
+	clearSelectedAddress({ commit }) {
+		commit('SET_SELECTED_ADDRESS')
 	}
 }
 

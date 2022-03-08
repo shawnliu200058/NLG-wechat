@@ -1,7 +1,7 @@
 import { createUser } from '../../api/my.js'
 
 const state = {
-	id: null,
+	id: 6,
 	openid: '',
 	nickName: '',
 	gender: '',

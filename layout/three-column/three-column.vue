@@ -1,5 +1,5 @@
 <template>
-		<view class="container">
+		<view class="container" :style="styleVars">
 			<view class="column1">
 				<slot name="column1"></slot>
 			</view>
@@ -15,7 +15,28 @@
 <script>
 	export default {
 		props: {
+			gridPartition: {
+				type: Array,
+				default: () => {
+					return [1, 3, 6]
+				}
+			}
+		},
+		data() {
+			return {
 
+			}
+		},
+		computed: {
+			styleVars() {
+				let str = ''
+				this.gridPartition.forEach(item => {
+					str += `${item}fr `
+				})
+				return {
+					'--division': str
+				}
+			}
 		}
 	}
 </script>
@@ -23,7 +44,7 @@
 <style scoped lang="scss">
 	.container {
 		display: grid;
-		grid-template-columns: 1fr 3fr 6fr;
+		grid-template-columns: var(--division);
 		grid-column-gap: 20rpx;
 		align-items: center;
 		width: 600rpx;

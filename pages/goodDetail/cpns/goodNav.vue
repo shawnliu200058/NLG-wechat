@@ -32,11 +32,11 @@
 
 <script>
 	import {
-		createNamespacedHelpers, mapGetters
+		createNamespacedHelpers, mapGetters, mapMutations
 	} from 'vuex'
-	const {
-		mapMutations
-	} = createNamespacedHelpers('cart')
+	// const {
+	// 	mapMutations
+	// } = createNamespacedHelpers('cart')
 	
 	export default {
 		props: {
@@ -77,9 +77,14 @@
 			this.options[1].info = this.goodsCountInCart
 		},
 		methods: {
+			// ...mapMutations({
+			// 	addToCart: 'SET_CART_LIST',
+			// 	setTotalPrice: 'SET_TOTAL_PRICE'
+			// }),
 			...mapMutations({
-				addToCart: 'SET_CART_LIST',
-				setTotalPrice: 'SET_TOTAL_PRICE'
+				addToCart: 'cart/SET_CART_LIST',
+				setTotalPrice: 'cart/SET_TOTAL_PRICE',
+				setUnpaidGood: 'unpaidOrder/SET_UNPAID_GOOD'
 			}),
 			collectOrCart(e) {
 				if(e.index === 0) {
@@ -103,16 +108,15 @@
 				}
 			},
 			popupOrPurchase(e) {
-				if(e.index === 0) {
-					this.$refs.popup.open('bottom')
-				}
+				this.$refs.popup.open('bottom')
 			},
 			addCartOrPurchase(e) {
+				const count = this.purchaseQuantity
+				// 记录购物车中商品总数量
+				this.options[1].info += count
+				
 				if(e.index === 0) {
 					console.log(this.goodInfo)
-					const count = this.purchaseQuantity
-					// 记录购物车中商品总数量
-					this.options[1].info += count
 					// 记录同种商品的数量
 					// 下面这行是错误的，因为是地址引用，this.goodInfo变化的同时state.list也会变化，会和mutations冲突
 					// this.goodInfo.count = this.purchaseQuantity => this.addToCart(this.goodInfo)
@@ -122,6 +126,15 @@
 					uni.showToast({
 						title: '加入购物车',
 						icon: 'success'
+					})
+				} else {
+					this.goodInfo.count = count
+					this.setUnpaidGood(this.goodInfo)
+					this.$Router.push({
+						path: '/pages/order/order',
+						query: {
+							entryBtn: '立即购买'
+						}
 					})
 				}
 			}

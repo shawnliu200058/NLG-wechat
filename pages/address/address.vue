@@ -1,7 +1,6 @@
 <template>
 	<view class="container center">
-		<address-info></address-info>
-		<circle-btn text="新增地址" class="btn" @click.native="editAddress"></circle-btn>
+		<address-info :entrance="entrance"></address-info>
 	</view>
 </template>
 
@@ -12,19 +11,18 @@
 	export default {
 		data() {
 			return {
-				
+				entrance: ''
 			}
 		},
 		components: {
 			CircleBtn,
 			AddressInfo
 		},
+		onLoad() {
+			this.entrance = this.$Route.query.entrance
+		},
 		methods: {
-			editAddress() {
-				this.$Router.push({
-					name: 'editAddress'
-				})
-			}
+			
 		}
 	}
 </script>

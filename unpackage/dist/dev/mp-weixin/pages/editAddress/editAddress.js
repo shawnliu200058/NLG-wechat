@@ -202,6 +202,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 19);
 
 
@@ -211,7 +214,8 @@ var _vuex = __webpack_require__(/*! vuex */ 19);
 
 var _inputBox = _interopRequireDefault(__webpack_require__(/*! @/components/input-box/input-box.vue */ 478));
 
-var _rules = _interopRequireDefault(__webpack_require__(/*! ./config/rules.js */ 494));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _createNamespacedHelp = (0, _vuex.createNamespacedHelpers)('address'),mapActions = _createNamespacedHelp.mapActions;var CircleBtn = function CircleBtn() {__webpack_require__.e(/*! require.ensure | components/circle-btn/circle-btn */ "components/circle-btn/circle-btn").then((function () {return resolve(__webpack_require__(/*! @/components/circle-btn/circle-btn.vue */ 486));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _rules = _interopRequireDefault(__webpack_require__(/*! ./config/rules.js */ 513));
+var _hook = __webpack_require__(/*! ./hook.js */ 494);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _createNamespacedHelp = (0, _vuex.createNamespacedHelpers)('address'),mapActions = _createNamespacedHelp.mapActions;var CircleBtn = function CircleBtn() {__webpack_require__.e(/*! require.ensure | components/circle-btn/circle-btn */ "components/circle-btn/circle-btn").then((function () {return resolve(__webpack_require__(/*! @/components/circle-btn/circle-btn.vue */ 486));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -221,49 +225,82 @@ var _rules = _interopRequireDefault(__webpack_require__(/*! ./config/rules.js */
         phone: '',
         address: '',
         house: '',
-        isDefault: 0 } };
+        isDefault: 0 },
 
+      showDelBtn: false };
 
   },
   components: {
     CircleBtn: CircleBtn },
 
   computed: _objectSpread({},
-  (0, _vuex.mapGetters)(['userId'])),
+  (0, _vuex.mapGetters)(['userId', 'addressInfo'])),
 
   onReady: function onReady() {
     this.$refs.form.setRules(_rules.default);
   },
-  beforeMount: function beforeMount() {
-    console.log(this.userId);
+  onLoad: function onLoad() {
+    this.getEchoData();
+    this.showDelBtn = this.$Route.query.type == 0 ? true : false;
   },
   methods: _objectSpread(_objectSpread({},
-  mapActions(['addAddress'])), {}, {
+  mapActions(['addAddress', 'modifyAddress', 'delAddress'])), {}, {
+    getEchoData: function getEchoData() {var _this = this;
+      if (this.$Route.query.addressId) {
+        // 找到该 id 对应的地址
+        var addressData = this.addressInfo.find(function (item) {return item.id == _this.$Route.query.addressId;});
+        for (var key in this.formData) {this.formData[key] = addressData[key];}
+      }
+    },
     chooseDefault: function chooseDefault(e) {
       if (e.target.value) this.formData.isDefault = 1;else
       this.formData.isDefault = 0;
     },
-    submit: function submit() {var _this = this;
+    submit: function submit() {var _this2 = this;
       this.$refs.form.validate().then(function (res) {
         // console.log(res)
-        _this.formData.user_id = _this.userId;
-        _this.addAddress(_this.formData).then(function (res) {
-          console.log(res);
-          uni.showToast({
-            title: '保存成功',
-            icon: 'success' });
-
-          _this.$Router.push({
-            name: 'editAddress' });
-
-        });
+        // this.formData.user_id = 6
+        // 新增
+        console.log(_this2.$Route.query.type);
+        if (!_this2.showDelBtn) {
+          _this2.addAddress({
+            addressInfo: _this2.formData,
+            userId: _this2.userId }).
+          then(function (res) {
+            (0, _hook.showToastBack)(uni, '新建成功', _this2);
+          });
+        } else {// 编辑
+          _this2.modifyAddress({
+            addressInfo: _this2.formData,
+            addressId: _this2.$Route.query.addressId }).
+          then(function (res) {
+            (0, _hook.showToastBack)(uni, '编辑成功', _this2);
+          });
+        }
       });
     },
-    chooseLocation: function chooseLocation() {var _this2 = this;
+    chooseLocation: function chooseLocation() {var _this3 = this;
       uni.chooseLocation({
         success: function success(res) {
-          // console.log(res)
-          _this2.formData.address = res.address;
+          console.log(res);
+          _this3.formData.address = res.address;
+        } });
+
+    },
+    deleteAddress: function deleteAddress() {var _this4 = this;var
+      addressId = this.$Route.query.addressId;
+
+      uni.showModal({
+        content: '是否删除',
+        success: function success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+            _this4.delAddress(addressId).then(function (res) {
+              (0, _hook.showToastBack)(uni, '删除成功', _this4);
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消');
+          }
         } });
 
     } }) };exports.default = _default;

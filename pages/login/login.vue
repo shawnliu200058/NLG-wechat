@@ -56,13 +56,14 @@
 										&js_code=${res.code}
 										&grant_type=authorization_code`
 										
+								// 这里用校园网请求会出错
 								uni.request({
 									url, // 请求路径
 									success: result => {
 										const { openid } = result.data
 										
 										console.log(openid)
-
+										
 										that.login({userInfo, openid}).then(res => {
 											console.log(res)
 											that.$Router.back(1, {
