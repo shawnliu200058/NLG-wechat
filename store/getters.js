@@ -16,7 +16,9 @@ const getters = {
 	// 收货人地址信息
 	addressInfo: state => state.address.addressInfo,
 	// 下订单时所选中的地址
-	selectedAddress: state => state.address.selectedAddress
+	selectedAddress: state => state.address.selectedAddress,
+	// 我的订单
+	orderInfo: state => state.paidOrder.myOrder
 }
 
 export default getters

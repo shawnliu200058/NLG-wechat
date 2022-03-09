@@ -3,6 +3,7 @@
   "usingComponents": {
     "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
     "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "u-empty": "/node-modules/uview-ui/components/u-empty/u-empty",
     "circle-btn": "/components/circle-btn/circle-btn",
     "cart-checkbox": "/components/checkbox/cartCheckbox",
     "three-column": "/layout/three-column/three-column"

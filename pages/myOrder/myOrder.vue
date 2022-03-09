@@ -1,34 +1,50 @@
 <template>
-	<view>
-		<uni-collapse>
-			<uni-collapse-item title="折叠内容">
-				<text>折叠内容</text>
-				<uni-icons type="checkbox"></uni-icons>
-			</uni-collapse-item>
-			<uni-collapse-item title="禁用状态" disabled>
-				<text>折叠内容</text>
-			</uni-collapse-item>
-		</uni-collapse>
+	<view class="container">
+		<template v-if="orderInfo.length">
+			<order-list-item v-for="order in orderInfo" 
+				:orderItem="order" :key="order.id"></order-list-item>
+		</template>
+			
+			<u-empty v-else
+				mode="order" width="200" text-size="16"
+				icon="http://cdn.uviewui.com/uview/empty/order.png">
+			</u-empty>
+		
 	</view>
 </template>
 
 <script>
+	import { createNamespacedHelpers, mapGetters } from 'vuex'
+	const { mapActions } = createNamespacedHelpers('paidOrder')
+	
+	import OrderListItem from './cpns/orderListItem.vue'
+	import DetailPopup from './cpns/detailPopup.vue'
+	
 	export default {
 		data() {
 			return {
 
 			}
 		},
-		onBackPress(e) {
-			console.log(e)
-			return true
+		components: {
+			OrderListItem,
+			DetailPopup
+		},
+		computed: {
+			...mapGetters(['orderInfo']),
+		},
+		onLoad() {
+			this.getOrder()
 		},
 		methods: {
-
+			...mapActions(['getOrder'])
 		}
 	}
 </script>
 
-<style>
-
+<style scoped lang="scss">
+ .container {
+	 
+	
+ }
 </style>

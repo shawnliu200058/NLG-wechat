@@ -2,8 +2,8 @@
   "navigationBarTitleText": "我的订单",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "uni-collapse": "/uni_modules/uni-collapse/components/uni-collapse/uni-collapse",
-    "uni-collapse-item": "/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item",
-    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
+    "u-empty": "/node-modules/uview-ui/components/u-empty/u-empty",
+    "order-list-item": "/pages/myOrder/cpns/orderListItem",
+    "detail-popup": "/pages/myOrder/cpns/detailPopup"
   }
 }

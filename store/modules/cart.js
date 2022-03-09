@@ -17,6 +17,7 @@ const mutations = {
 		const length = state.list.length
 		if(length) {
 			for(let i in state.list) {
+				// Vue.set(state.list[i].count, i, 0)
 				// 新加入的商品原数组中已有，只需更新数量
 				if(state.list[i].id === goodInfo.id) {
 					state.list[i].count += count

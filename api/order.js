@@ -7,3 +7,15 @@ export function placeOrderInfo(data) {
 		data
 	})
 }
+
+export function getOrderInfo(userId) {
+	return request({
+		url: `/order/list?userId=${userId}`
+	})
+}
+export function delOrderInfo(orderId) {
+	return request({
+		url: `/order/delete/${orderId}`,
+		method: 'DELETE'
+	})
+}

@@ -20,7 +20,7 @@
 	export default {
 		data() {
 			return {
-				switchText: true
+				switchText: true,
 			}
 		},
 		components: {

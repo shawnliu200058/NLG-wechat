@@ -154,18 +154,15 @@ var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumera
 
 {
   data: function data() {
-    return {};
-
+    return {
+      list: [] };
 
   },
   components: {
     ListItem: ListItem },
 
-  computed: _objectSpread(_objectSpread({},
-  (0, _vuex.mapGetters)(['cartList'])), {}, {
-    list: function list() {
-      return this.cartList;
-    } }),
+  computed: _objectSpread({},
+  (0, _vuex.mapGetters)(['cartList'])),
 
   methods: {} };exports.default = _default;
 

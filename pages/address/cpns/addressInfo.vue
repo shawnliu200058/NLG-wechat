@@ -1,27 +1,34 @@
 <template>
 	<view class="container">
-		<uni-card v-for="item in info" :key="item.id">
-			<three-column :gridPartition="[1, 8, 1]">
-				<template #column1>
-					<uni-icons v-if="item.isDefault" type="home-filled"></uni-icons>
-				</template>
-				<template #column2>
-					<view @click="chooseAddress(item.id)">
-						<view class="left-align">
-							<text>{{item.realName}} {{item.phone}}</text>
+		<template v-if="info.length">
+			<uni-card v-for="item in info" :key="item.id">
+				<three-column :gridPartition="[1, 8, 1]">
+					<template #column1>
+						<uni-icons v-if="item.isDefault" type="home-filled"></uni-icons>
+					</template>
+					<template #column2>
+						<view @click="chooseAddress(item.id)">
+							<view class="left-align">
+								<text>{{item.realName}} {{item.phone}}</text>
+							</view>
+							<view>
+								<text>{{item.address}} {{item.house}}</text>
+							</view>
 						</view>
-						<view>
-							<text>{{item.address}} {{item.house}}</text>
+					</template>
+					<template #column3>
+						<view class="right-align">
+							<uni-icons type="compose" @click="goToPage(0, item.id)"></uni-icons>
 						</view>
-					</view>
-				</template>
-				<template #column3>
-					<view class="right-align">
-						<uni-icons type="compose" @click="goToPage(0, item.id)"></uni-icons>
-					</view>
-				</template>
-			</three-column>
-		</uni-card>
+					</template>
+				</three-column>
+			</uni-card>
+		</template>
+		
+		<u-empty v-else
+			mode="address" width="200" text-size="16"
+			icon="http://cdn.uviewui.com/uview/empty/address.png">
+		</u-empty>
 		
 		<view class="center btn">
 			<circle-btn text="新增地址" @click.native="goToPage(1)"></circle-btn>

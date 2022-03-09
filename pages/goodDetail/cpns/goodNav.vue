@@ -102,8 +102,11 @@
 						})
 					}
 				} else {
-					this.$Router.pushTab({
-						name: 'cart'
+					// this.$Router.pushTab({
+					// 	name: 'cart'
+					// })
+					uni.reLaunch({
+						url: '/pages/cart/cart'
 					})
 				}
 			},

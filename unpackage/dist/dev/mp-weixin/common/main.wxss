@@ -273,8 +273,13 @@
   justify-content: flex-start;
 }
 .right-align {
+  margin-left: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+.column-sort {
+  display: flex;
+  flex-direction: column;
 }
 

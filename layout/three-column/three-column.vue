@@ -47,6 +47,6 @@
 		grid-template-columns: var(--division);
 		grid-column-gap: 20rpx;
 		align-items: center;
-		width: 600rpx;
+		// width: 600rpx;
 	}
 </style>

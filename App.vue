@@ -40,8 +40,15 @@
 	
 	// 向右对齐
 	.right-align {
+		margin-left: auto;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
+	}
+	
+	// 按列排序
+	.column-sort {
+		display: flex;
+		flex-direction: column;
 	}
 </style>

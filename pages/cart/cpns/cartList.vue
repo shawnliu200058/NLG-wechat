@@ -3,7 +3,7 @@
 		<template v-if="cartList.length">
 			<list-item v-for="item in cartList" :key="item.id" :item="item"></list-item>
 		</template>
-		<u-empty v-else mode="car" icon="http://cdn.uviewui.com/uview/empty/car.png">
+		<u-empty v-else mode="car" width="200" icon="http://cdn.uviewui.com/uview/empty/car.png">
 		</u-empty>
 	</view>
 </template>
@@ -18,7 +18,7 @@
 	export default {
 		data() {
 			return {
-
+				list: []
 			}
 		},
 		components: {
@@ -26,9 +26,6 @@
 		},
 		computed: {
 			...mapGetters(['cartList']),
-			list() {
-				return this.cartList
-			}
 		},
 		methods: {
 

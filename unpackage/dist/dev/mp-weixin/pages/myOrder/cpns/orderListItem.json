@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "u-divider": "/node-modules/uview-ui/components/u-divider/u-divider",
+    "three-column": "/layout/three-column/three-column",
+    "detail-popup": "/pages/myOrder/cpns/detailPopup",
+    "del-order": "/pages/myOrder/cpns/delOrder"
+  }
+}
