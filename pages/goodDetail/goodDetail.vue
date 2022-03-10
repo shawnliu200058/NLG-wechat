@@ -8,8 +8,9 @@
 
 <script>
 	import {
-		mapGetters
+		mapGetters, createNamespacedHelpers
 	} from 'vuex'
+	const { mapActions } = createNamespacedHelpers('good')
 
 	import MainInfo from './cpns/mainInfo.vue'
 	import DetailInfo from './cpns/detailInfo.vue'
@@ -31,6 +32,9 @@
 		},
 		onLoad() {
 			this.goodInfo = this.goodList.find(element => element.id == this.$Route.query.goodId);
+		},
+		methods: {
+			...mapActions(['getGoodList'])
 		}
 	}
 </script>

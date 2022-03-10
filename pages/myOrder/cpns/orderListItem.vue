@@ -3,7 +3,7 @@
 		<uni-card>
 			<template v-for="good in orderItem.goodList">
 				<three-column :key="good.id"
-					:gridPartition="[2, 7, 1]" class="row-divide">
+					:gridPartition="[2, 6, 2]" class="row-divide">
 					<template #column1>
 						<image :src="good.displayPicUrl" mode="aspectFill" class="img"></image>
 					</template>

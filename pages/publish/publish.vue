@@ -90,22 +90,6 @@
 				})
 			},
 			getLocation() {
-				// uni.getLocation({
-				// 	success: (res) => {
-				// 		console.log(res)
-				// 		const { latitude, longitude } = res
-				// 		this.getNowAddressInfo(res)
-				// 		uni.chooseLocation({
-				// 			latitude,
-				// 			longitude,
-				// 			success: (res) => {
-				// 				console.log(res.address)
-				// 				this.formData.address = res.address
-				// 			}
-				// 		})
-				// 	}
-				// })
-				
 				uni.chooseLocation({
 					success: (res) => {
 						console.log(res.address)

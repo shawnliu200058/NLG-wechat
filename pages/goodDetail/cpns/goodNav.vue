@@ -34,9 +34,7 @@
 	import {
 		createNamespacedHelpers, mapGetters, mapMutations
 	} from 'vuex'
-	// const {
-	// 	mapMutations
-	// } = createNamespacedHelpers('cart')
+	const { mapActions } = createNamespacedHelpers('good')
 	
 	export default {
 		props: {
@@ -46,7 +44,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['goodsCountInCart'])
+			...mapGetters(['goodsCountInCart', 'userId'])
 		},
 		data() {
 			return {
@@ -74,39 +72,50 @@
 			}
 		},
 		beforeMount() {
+			if(this.goodInfo.collect_userId && 
+				this.goodInfo.collect_userId == this.userId) {
+				this.options[0].icon = 'star-filled'
+			}
 			this.options[1].info = this.goodsCountInCart
 		},
 		methods: {
-			// ...mapMutations({
-			// 	addToCart: 'SET_CART_LIST',
-			// 	setTotalPrice: 'SET_TOTAL_PRICE'
-			// }),
 			...mapMutations({
 				addToCart: 'cart/SET_CART_LIST',
 				setTotalPrice: 'cart/SET_TOTAL_PRICE',
 				setUnpaidGood: 'unpaidOrder/SET_UNPAID_GOOD'
 			}),
+			...mapActions(['setCollectStatus']),
 			collectOrCart(e) {
 				if(e.index === 0) {
 					const { icon } = this.options[0]
 					this.options[0].icon = icon === 'star' ? 'star-filled' : 'star'
 					if(this.options[0].icon === 'star') {
-						uni.showToast({
-							title: '取消收藏',
-							icon: 'success'
+						// 若取消收藏，则把商品对应的收藏者 id 置为 null
+						this.setCollectStatus({
+							userId: null,
+							goodId: this.goodInfo.id
+						}).then(res => {
+							console.log(res.data)
+							uni.showToast({
+								title: '取消收藏',
+								icon: 'success'
+							})
 						})
 					} else {
-						uni.showToast({
-							title: '已收藏',
-							icon: 'success'
+						this.setCollectStatus({
+							userId: this.userId,
+							goodId: this.goodInfo.id
+						}).then(res => {
+							console.log(res.data)
+							uni.showToast({
+								title: '已收藏',
+								icon: 'success'
+							})
 						})
 					}
 				} else {
-					// this.$Router.pushTab({
-					// 	name: 'cart'
-					// })
-					uni.reLaunch({
-						url: '/pages/cart/cart'
+					this.$Router.replaceAll({
+						name: 'cart'
 					})
 				}
 			},

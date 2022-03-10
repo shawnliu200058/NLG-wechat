@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "我的收藏",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
+    "u-empty": "/node-modules/uview-ui/components/u-empty/u-empty",
+    "three-column": "/layout/three-column/three-column"
+  }
+}

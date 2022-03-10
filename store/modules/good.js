@@ -1,17 +1,7 @@
-import { getHomeGoods } from '../../api/home.js'
+import { getHomeGoods } from '@/api/home.js'
+import { updateCollect } from '@/api/collect.js'
 
 const state = {
-	// id: null,
-	// name: '',
-	// categoryId: null,
-	// detail: '',
-	// price: null,
-	// unit: '',
-	// specification: '',
-	// stock: null,
-	// address: '',
-	// displayPicUrl: '',
-	// detailPic: null
 	list: null
 }
 
@@ -26,6 +16,17 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			getHomeGoods().then(res => {
 				commit('SET_GOOD_LIST', res.data)
+			})
+		})
+	},
+	setCollectStatus({ dispatch }, info) {
+		console.log(info)
+		return new Promise((resolve, reject) => {
+			updateCollect(info).then(res => {
+				dispatch('getGoodList')
+				resolve(res)
+			}).catch(err => {
+				reject(err)
 			})
 		})
 	}

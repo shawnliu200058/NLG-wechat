@@ -10539,7 +10539,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   // 下订单时所选中的地址
   selectedAddress: function selectedAddress(state) {return state.address.selectedAddress;},
   // 我的订单
-  orderInfo: function orderInfo(state) {return state.paidOrder.myOrder;} };var _default =
+  orderInfo: function orderInfo(state) {return state.paidOrder.myOrder;},
+  // 我的收藏
+  collectInfo: function collectInfo(state) {return state.collect.list;} };var _default =
 
 
 getters;exports.default = _default;
@@ -10556,6 +10558,7 @@ var map = {
 	"./address.js": 508,
 	"./cart.js": 22,
 	"./category.js": 23,
+	"./collect.js": 803,
 	"./good.js": 26,
 	"./paidOrder.js": 521,
 	"./unpaidOrder.js": 510,
@@ -10866,20 +10869,10 @@ request;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _home = __webpack_require__(/*! ../../api/home.js */ 24);
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _home = __webpack_require__(/*! @/api/home.js */ 24);
+var _collect = __webpack_require__(/*! @/api/collect.js */ 799);
 
 var state = {
-  // id: null,
-  // name: '',
-  // categoryId: null,
-  // detail: '',
-  // price: null,
-  // unit: '',
-  // specification: '',
-  // stock: null,
-  // address: '',
-  // displayPicUrl: '',
-  // detailPic: null
   list: null };
 
 
@@ -10894,6 +10887,17 @@ var actions = {
     return new Promise(function (resolve, reject) {
       (0, _home.getHomeGoods)().then(function (res) {
         commit('SET_GOOD_LIST', res.data);
+      });
+    });
+  },
+  setCollectStatus: function setCollectStatus(_ref2, info) {var dispatch = _ref2.dispatch;
+    console.log(info);
+    return new Promise(function (resolve, reject) {
+      (0, _collect.updateCollect)(info).then(function (res) {
+        dispatch('getGoodList');
+        resolve(res);
+      }).catch(function (err) {
+        reject(err);
       });
     });
   } };var _default =
@@ -11007,7 +11011,7 @@ Object.defineProperty(exports, "__esModule", { value: true });Object.definePrope
 
 var router = (0, _uniSimpleRouter.createRouter)({
   platform: "mp-weixin",
-  routes: _toConsumableArray([{"path":"/pages/index/index","name":"index","aliasPath":"/"},{"path":"/pages/category/category","name":"category"},{"path":"/pages/login/login","name":"login"},{"path":"/pages/my/my","name":"my"},{"path":"/pages/publish/publish","name":"publish"},{"path":"/pages/goodDetail/goodDetail","name":"goodDetail"},{"path":"/pages/cart/cart","name":"cart"},{"path":"/pages/order/order","name":"order"},{"path":"/pages/address/address","name":"address"},{"path":"/pages/editAddress/editAddress","name":"editAddress"},{"path":"/pages/myOrder/myOrder","name":"myOrder"},{"path":"/pages/paymentSucceeded/paymentSucceeded","name":"paymentSucceeded"}]) });
+  routes: _toConsumableArray([{"path":"/pages/index/index","name":"index","aliasPath":"/"},{"path":"/pages/category/category","name":"category"},{"path":"/pages/login/login","name":"login"},{"path":"/pages/my/my","name":"my"},{"path":"/pages/publish/publish","name":"publish"},{"path":"/pages/goodDetail/goodDetail","name":"goodDetail"},{"path":"/pages/cart/cart","name":"cart"},{"path":"/pages/order/order","name":"order"},{"path":"/pages/address/address","name":"address"},{"path":"/pages/editAddress/editAddress","name":"editAddress"},{"path":"/pages/myOrder/myOrder","name":"myOrder"},{"path":"/pages/paymentSucceeded/paymentSucceeded","name":"paymentSucceeded"},{"path":"/pages/myCollect/myCollect","name":"myCollect"}]) });
 
 //全局路由前置守卫
 exports.router = router;router.beforeEach(function (to, from, next) {
@@ -25295,6 +25299,130 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       type: Boolean,
       default: uni.$u.props.line.dashed } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 772 */,
+/* 773 */,
+/* 774 */,
+/* 775 */,
+/* 776 */,
+/* 777 */,
+/* 778 */,
+/* 779 */,
+/* 780 */,
+/* 781 */,
+/* 782 */,
+/* 783 */,
+/* 784 */,
+/* 785 */,
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */
+/*!**************************************************!*\
+  !*** D:/HBuilderProjects/NLG_wechat/api/good.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getGoodsByKeyword = getGoodsByKeyword;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/request.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function getGoodsByKeyword(word) {
+  return (0, _request.default)({
+    url: "/good/query?keyword=".concat(word) });
+
+}
+
+/***/ }),
+/* 790 */,
+/* 791 */,
+/* 792 */,
+/* 793 */,
+/* 794 */,
+/* 795 */,
+/* 796 */,
+/* 797 */,
+/* 798 */,
+/* 799 */
+/*!*****************************************************!*\
+  !*** D:/HBuilderProjects/NLG_wechat/api/collect.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.updateCollect = updateCollect;exports.getCollectListById = getCollectListById;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/request.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function updateCollect(data) {
+  return (0, _request.default)({
+    url: "/collect/update",
+    method: 'POST',
+    data: data });
+
+}
+
+function getCollectListById(userId) {
+  return (0, _request.default)({
+    url: "/collect/list?user_id=".concat(userId) });
+
+}
+
+/***/ }),
+/* 800 */,
+/* 801 */,
+/* 802 */,
+/* 803 */
+/*!***************************************************************!*\
+  !*** D:/HBuilderProjects/NLG_wechat/store/modules/collect.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _collect = __webpack_require__(/*! @/api/collect.js */ 799);
+
+var state = {
+  list: [] };
+
+
+var mutations = {
+  SET_COLLECT_LIST: function SET_COLLECT_LIST(state, collectList) {
+    state.list = collectList;
+  } };
+
+
+var actions = {
+  getCollectList: function getCollectList(_ref) {var commit = _ref.commit,rootGetters = _ref.rootGetters;var
+    userId = rootGetters.userId;
+    return new Promise(function (resolve, reject) {
+      (0, _collect.getCollectListById)(userId).then(function (res) {
+        console.log(res.data);
+        commit('SET_COLLECT_LIST', res.data.collectGood);
+        resolve(res);
+      }).catch(function (err) {
+        reject(err);
+      });
+    });
+  }
+  // updateCollectList({ dispatch }, info) {
+  // 	console.log(info)
+  // 	return new Promise((resolve, reject) => {
+  // 		updateCollect(info).then(res => {
+  // 			dispatch('getCollectList')
+  // 			resolve(res)
+  // 		}).catch(err => {
+  // 			reject(err)
+  // 		})
+  // 	})
+  // }
+};var _default =
+
+{
+  namespaced: true,
+  state: state,
+  mutations: mutations,
+  actions: actions };exports.default = _default;
 
 /***/ })
 ]]);

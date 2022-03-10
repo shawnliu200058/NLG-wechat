@@ -26,6 +26,13 @@
 						type: 'list'
 					}
 				}, {
+					title: '我的收藏',
+					extraIcon: {
+						size: '20',
+						type: 'star'
+					}
+				}, 
+				{
 					title: '系统设置',
 					extraIcon: {
 						size: '20',
@@ -46,6 +53,10 @@
 				} else if(index == 1) {
 					this.$Router.push({
 						name: 'myOrder'
+					})
+				} else if(index == 2) {
+					this.$Router.push({
+						name: 'myCollect'
 					})
 				}
 			}

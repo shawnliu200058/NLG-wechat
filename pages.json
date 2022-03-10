@@ -99,6 +99,13 @@
 					}
 				}
 			}
+		}, {
+			"path": "pages/myCollect/myCollect",
+			"name": "myCollect",
+			"style": {
+				"navigationBarTitleText": "我的收藏",
+				"enablePullDownRefresh": false
+			}
 
 		}
 	],

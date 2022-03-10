@@ -1,7 +1,10 @@
 <template>
 	<view class="container">
-		<uni-search-bar :radius="100" @confirm="search" placeholder="搜索商品名称"></uni-search-bar>
-		<CategoryList :categoryList="list"></CategoryList>
+		<uni-search-bar v-model="searchValue" :radius="100" placeholder="搜索商品名称" 
+			@focus="isSearch = true" @confirm="confirm" @cancel="isSearch = false">
+			</uni-search-bar>
+		<CategoryList v-if="!isSearch" :categoryList="list"></CategoryList>
+		<search-content v-else ref="searchContent"></search-content>
 	</view>
 </template>
 
@@ -9,15 +12,18 @@
 	import { mapGetters } from 'vuex'
 	
 	import CategoryList from './cpns/categoryList.vue'
+	import SearchContent from './cpns/searchContent.vue'
 	
 	export default {
 		data() {
 			return {
-
+				isSearch: false,
+				searchValue: null
 			}
 		},
 		components: {
-			CategoryList
+			CategoryList,
+			SearchContent
 		},
 		computed: {
 			...mapGetters(['categoryList']),
@@ -26,7 +32,11 @@
 			}
 		},
 		methods: {
+			confirm() {
+				if(this.searchValue === '') this.searchValue = null
+				this.$refs.searchContent.getGoodByKeyword(this.searchValue)
 
+			}
 		}
 	}
 </script>

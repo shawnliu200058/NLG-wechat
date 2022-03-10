@@ -195,13 +195,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _vuex = __webpack_require__(/*! vuex */ 19);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _createNamespacedHelp =
 
 
-// const {
-// 	mapMutations
-// } = createNamespacedHelpers('cart')
-var _default =
+(0, _vuex.createNamespacedHelpers)('good'),mapActions = _createNamespacedHelp.mapActions;var _default =
+
 {
   props: {
     goodInfo: {
@@ -210,7 +208,7 @@ var _default =
 
 
   computed: _objectSpread({},
-  (0, _vuex.mapGetters)(['goodsCountInCart'])),
+  (0, _vuex.mapGetters)(['goodsCountInCart', 'userId'])),
 
   data: function data() {
     return {
@@ -238,39 +236,50 @@ var _default =
 
   },
   beforeMount: function beforeMount() {
+    if (this.goodInfo.collect_userId &&
+    this.goodInfo.collect_userId == this.userId) {
+      this.options[0].icon = 'star-filled';
+    }
     this.options[1].info = this.goodsCountInCart;
   },
-  methods: _objectSpread(_objectSpread({},
-
-
-
-
+  methods: _objectSpread(_objectSpread(_objectSpread({},
   (0, _vuex.mapMutations)({
     addToCart: 'cart/SET_CART_LIST',
     setTotalPrice: 'cart/SET_TOTAL_PRICE',
-    setUnpaidGood: 'unpaidOrder/SET_UNPAID_GOOD' })), {}, {
+    setUnpaidGood: 'unpaidOrder/SET_UNPAID_GOOD' })),
 
+  mapActions(['setCollectStatus'])), {}, {
     collectOrCart: function collectOrCart(e) {
       if (e.index === 0) {var
         icon = this.options[0].icon;
         this.options[0].icon = icon === 'star' ? 'star-filled' : 'star';
         if (this.options[0].icon === 'star') {
-          uni.showToast({
-            title: '取消收藏',
-            icon: 'success' });
+          // 若取消收藏，则把商品对应的收藏者 id 置为 null
+          this.setCollectStatus({
+            userId: null,
+            goodId: this.goodInfo.id }).
+          then(function (res) {
+            console.log(res.data);
+            uni.showToast({
+              title: '取消收藏',
+              icon: 'success' });
 
+          });
         } else {
-          uni.showToast({
-            title: '已收藏',
-            icon: 'success' });
+          this.setCollectStatus({
+            userId: this.userId,
+            goodId: this.goodInfo.id }).
+          then(function (res) {
+            console.log(res.data);
+            uni.showToast({
+              title: '已收藏',
+              icon: 'success' });
 
+          });
         }
       } else {
-        // this.$Router.pushTab({
-        // 	name: 'cart'
-        // })
-        uni.reLaunch({
-          url: '/pages/cart/cart' });
+        this.$Router.replaceAll({
+          name: 'cart' });
 
       }
     },
