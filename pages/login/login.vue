@@ -4,15 +4,8 @@
 			src="https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00207-3477.jpg" 
 			mode="aspectFill">
 		</image>
-		
-		<view class="login-container">
-			<button class="center" @click="auth">
-				<uni-icons type="weixin" size="28"></uni-icons>
-				<text>微信授权登录</text>
-			</button>
 			
-		<other-login></other-login>
-		</view>
+		<login-form></login-form>
 	</view>
 </template>
 
@@ -20,11 +13,11 @@
 	import { createNamespacedHelpers } from 'vuex'
 	const { mapActions } = createNamespacedHelpers('user')
 	
-	import OtherLogin from './cpns/otherLogin.vue'
+	import LoginForm from './cpns/loginForm.vue'
 	
 	export default {
 		components: {
-			OtherLogin
+			LoginForm
 		},
 		data() {
 			return {
@@ -97,15 +90,6 @@
 	 }
 	 .login-container {
 		 
-		 button {
-		 		 width: 50%;
-		 		 height: 100rpx;
-				 margin-bottom: 40rpx;
-		 		 font-size: $uni-font-size-base;
-		 		 .uni-icons {
-		 			 padding-right: 10rpx;
-		 		 }
-		 }
 	 }
  }
 </style>

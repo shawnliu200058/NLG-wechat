@@ -1,4 +1,4 @@
-import { getHomeGoods } from '@/api/home.js'
+import { getList } from '@/api/index.js'
 import { updateCollect } from '@/api/collect.js'
 
 const state = {
@@ -14,7 +14,8 @@ const mutations = {
 const actions = {
 	getGoodList({ commit }) {
 		return new Promise((resolve, reject) => {
-			getHomeGoods().then(res => {
+			getList('good').then(res => {
+				// console.log(res)
 				commit('SET_GOOD_LIST', res.data)
 			})
 		})

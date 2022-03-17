@@ -11,8 +11,8 @@
 
 __webpack_require__(/*! .env.js */ 12);
 var _store = _interopRequireWildcard(__webpack_require__(/*! ./store */ 18));
-var _router = __webpack_require__(/*! ./router.js */ 29);
-var _uviewUi = _interopRequireDefault(__webpack_require__(/*! uview-ui */ 548));
+var _router = __webpack_require__(/*! ./router.js */ 36);
+var _uviewUi = _interopRequireDefault(__webpack_require__(/*! uview-ui */ 38));
 
 
 

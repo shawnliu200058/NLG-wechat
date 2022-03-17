@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { router } from '../router.js'
 import getters from './getters.js'
 
 Vue.use(Vuex)
@@ -23,9 +24,14 @@ const store = new Vuex.Store({
 })
 
 export function retriveData() {
-	store.dispatch('category/getCategoryList')
-	store.dispatch('good/getGoodList')
-	store.dispatch('address/getAddress')
+	console.log(router.$route.history.current.fullPath)
+	const curPath = router.$route.history.current.fullPath
+	if(curPath !== '/' && curPath !== '/pages/register/register') {
+		store.dispatch('category/getCategoryList')
+		store.dispatch('good/getGoodList')
+		store.dispatch('address/getAddress')
+		store.dispatch('user/loadUserInfo')
+	}
 }
 
 export default store

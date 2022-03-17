@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "农乐购",
+  "usingComponents": {
+    "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar",
+    "uni-fab": "/uni_modules/uni-fab/components/uni-fab/uni-fab",
+    "carousel-list": "/pages/home/cpns/carouselList",
+    "category": "/pages/home/cpns/category",
+    "recommended-view-list": "/pages/home/cpns/recommededView"
+  }
+}

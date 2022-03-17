@@ -29,6 +29,7 @@
         ]
     },
     "dependencies": {
+        "js-cookie": "^3.0.1",
         "uni-read-pages": "^1.0.5",
         "uni-simple-router": "^2.0.7",
         "uview-ui": "^2.0.28"

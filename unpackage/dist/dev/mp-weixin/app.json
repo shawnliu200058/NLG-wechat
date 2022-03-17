@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/category/category",
-    "pages/login/login",
     "pages/my/my",
     "pages/publish/publish",
     "pages/goodDetail/goodDetail",
@@ -12,7 +12,9 @@
     "pages/editAddress/editAddress",
     "pages/myOrder/myOrder",
     "pages/paymentSucceeded/paymentSucceeded",
-    "pages/myCollect/myCollect"
+    "pages/myCollect/myCollect",
+    "pages/register/register",
+    "pages/logout/logout"
   ],
   "subPackages": [],
   "window": {

@@ -1,8 +1,7 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "登录页",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
-    "other-login": "/pages/login/cpns/otherLogin"
+    "login-form": "/pages/login/cpns/loginForm"
   }
 }

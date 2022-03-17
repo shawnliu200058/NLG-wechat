@@ -1,0 +1,1 @@
+<view class="overall"><u-button vue-id="2b769980-1" type="primary" plain="{{true}}" hairline="{{true}}" text="退出登录" data-event-opts="{{[['^click',[['logout']]]]}}" bind:click="__e" bind:__l="__l"></u-button></view>

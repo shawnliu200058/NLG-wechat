@@ -6,9 +6,14 @@ export function getHomeCarousels() {
 	})
 }
 
-export function getCategoryList() {
+export function getList(type, queryInfo = {
+	offset: 0,
+	limit: 10
+}) {
 	return request({
-		url: '/category/list',
+		url: `/${type}/list`,
+		method: 'POST',
+		data: queryInfo
 	})
 }
 

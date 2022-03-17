@@ -25,9 +25,12 @@
 /* 透明度 */
 /* 文章场景相关 */
 .container.data-v-4030dc27 {
-  color: #23f392;
+  padding: 30rpx;
 }
-.container .other.data-v-4030dc27 {
-  margin: 0 30rpx;
+.container .register.data-v-4030dc27 {
+  color: #2979ff;
+  font-size: 30rpx;
+  line-height: 34rpx;
+  text-decoration: underline;
 }
 

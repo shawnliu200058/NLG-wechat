@@ -27,13 +27,4 @@
 .container image.data-v-b237504c {
   width: 100%;
 }
-.container .login-container button.data-v-b237504c {
-  width: 50%;
-  height: 100rpx;
-  margin-bottom: 40rpx;
-  font-size: 14px;
-}
-.container .login-container button .uni-icons.data-v-b237504c {
-  padding-right: 10rpx;
-}
 

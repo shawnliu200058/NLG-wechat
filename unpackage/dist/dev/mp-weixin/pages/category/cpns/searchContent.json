@@ -1,8 +1,8 @@
 {
+  "component": true,
   "usingComponents": {
     "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
     "u-empty": "/node-modules/uview-ui/components/u-empty/u-empty",
     "three-column": "/layout/three-column/three-column"
-  },
-  "component": true
+  }
 }

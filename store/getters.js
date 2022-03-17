@@ -1,4 +1,5 @@
 const getters = {
+	carouselList: state => state.carousel.list,
 	userId: state => state.user.id,
 	openid: state => state.user.openid,
 	nickName: state => state.user.nickName,

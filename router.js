@@ -3,14 +3,24 @@ import {
 	createRouter
 } from 'uni-simple-router';
 
+import {
+	getToken
+} from '@/utils/auth.js'
+
 const router = createRouter({
 	platform: process.env.VUE_APP_PLATFORM,
 	routes: [...ROUTES]
 });
 //全局路由前置守卫
 router.beforeEach((to, from, next) => {
-	// console.log(from.name)
-	if(to.fullPath === '/') to.fullPath = '/pages/index/index'
+	console.log(to.name)
+	if (to.fullPath === '/') to.fullPath = '/pages/login/login'
+	if (to.name !== 'login') {
+		const token = getToken()
+		if (!token) {
+			next({ name: 'login' });
+		}
+	}
 	next();
 });
 // 全局路由后置守卫

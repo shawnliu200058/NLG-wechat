@@ -1,9 +1,8 @@
 <template>
-	<view class="container"  @click="$Router.push({name: 'login'})">
+	<view class="container" @click="$Router.push({name: 'logout'})">
 		<image :src="avatar_url ? avatar_url
-			: '../../../static/avatar/mmexport02d1443711db4c6508cc18aca6ebf25f.png'" mode=""></image>
-		<!-- <image @click="a" src="../../../static/avatar/mmexport02d1443711db4c6508cc18aca6ebf25f.png" mode=""></image> -->
-		<text>{{nick_name ? nick_name : '请先登录'}}</text>
+			: '../../static/avatar/mmexport02d1443711db4c6508cc18aca6ebf25f.png'" mode=""></image>
+		<text>{{nick_name}}</text>
 	</view>
 </template>
 

@@ -1,4 +1,4 @@
-import { getCategoryList } from '@/api/home.js'
+import { getList } from '@/api/index.js'
 
 const state = {
 	list: [],
@@ -19,7 +19,8 @@ const actions = {
 	getCategoryList({ commit, state }) {
 		if(!state.list.length) {
 			return new Promise((resolve, reject) => {
-				getCategoryList().then(res => {
+				getList('category').then(res => {
+					// console.log(res.data)
 					commit('SET_LIST', res.data)
 					// res.data.forEach(item => {
 					// 	commit('SET_LIST', item)

@@ -6,11 +6,19 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"name": "index",
+			"path": "pages/login/login",
+			"name": "login",
 			"aliasPath": "/",
 			"style": {
-				// "navigationBarTitleText": "农乐购"
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "登录页"
+			}
+		}, {
+			"path": "pages/index/index",
+			"name": "index",
+			"style": {
+				"navigationBarTitleText": "农乐购"
 			}
 		}, {
 			"path": "pages/category/category",
@@ -18,14 +26,6 @@
 			"style": {
 				"enablePullDownRefresh": false
 			}
-		}, {
-			"path": "pages/login/login",
-			"name": "login",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
 		}, {
 			"path": "pages/my/my",
 			"name": "my",
@@ -104,6 +104,21 @@
 			"name": "myCollect",
 			"style": {
 				"navigationBarTitleText": "我的收藏",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/register/register",
+			"name": "register",
+			"style": {
+				"navigationBarTitleText": "注册新用户",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/logout/logout",
+			"name": "logout",
+			"style": {
+				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
