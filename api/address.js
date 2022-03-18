@@ -8,9 +8,9 @@ export function addDeliveryAddress(data, userId) {
 	})
 }
 
-export function getDeliveryAddress() {
+export function getDeliveryAddress(userId) {
 	return request({
-		url: '/user/address'
+		url: `/user/address/${userId}`
 	})
 }
 

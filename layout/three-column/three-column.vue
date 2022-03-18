@@ -43,6 +43,7 @@
 
 <style scoped lang="scss">
 	.container {
+		width: 620rpx;
 		display: grid;
 		grid-template-columns: var(--division);
 		grid-column-gap: 20rpx;

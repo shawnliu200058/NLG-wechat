@@ -74,7 +74,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['categoryList']),
+			...mapGetters(['categoryList', 'userId']),
 		},
 		onReady() {
 			this.$refs.form.setRules(rules)
@@ -115,39 +115,18 @@
 						if (res.confirm) {
 							console.log('用户点击确定');
 							that.$refs.form.validate().then(res=>{
-								console.log('表单数据信息：', res);
+								// console.log('表单数据信息：', res);
+								that.formData.userId = that.userId
 								createGood(that.formData).then(res => {
 									console.log(res.data[0].insertId)
 									const goodId = res.data[0].insertId
 									
-									// 上传商品展示图
-									uni.uploadFile({
-										url: `http://localhost:8888/upload/displayPic/${goodId}`, //仅为示例，非真实的接口地址
-										filePath: that.displayPicUrl,
-										name: 'displayPic',
-										// formData: {
-										// 	'user': 'test'
-										// },
-										success: (uploadFileRes) => {
-											console.log(uploadFileRes.data);
-										}
-									});
-									
-									// 上传商品详情图
-									that.detailPicUrl.forEach(path => {
-										uni.uploadFile({
-											url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
-											filePath: path,
-											name: 'detailPic',
-											success: (uploadFileRes) => {
-												console.log(uploadFileRes.data);
-											}
-										});
-									})
+									that.uploadPic(goodId)
 									
 									uni.showToast({
 										title: '提交成功'
 									})
+									that.$Router.push({name: 'index'})
 								})
 									
 							}).catch(err =>{
@@ -159,6 +138,29 @@
 						}
 					}
 				});
+			},
+			uploadPic(goodId) {
+				// 上传商品展示图
+				uni.uploadFile({
+					url: `http://localhost:8888/upload/displayPic/${goodId}`, //仅为示例，非真实的接口地址
+					filePath: this.displayPicUrl,
+					name: 'displayPic',
+					success: (uploadFileRes) => {
+						console.log(uploadFileRes.data);
+					}
+				});
+				
+				// 上传商品详情图
+				this.detailPicUrl.forEach(path => {
+					uni.uploadFile({
+						url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
+						filePath: path,
+						name: 'detailPic',
+						success: (uploadFileRes) => {
+							console.log(uploadFileRes.data);
+						}
+					});
+				})
 			},
 			deleteFile() {
 				this.formData.imgCount--

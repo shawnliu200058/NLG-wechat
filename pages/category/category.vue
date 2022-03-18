@@ -9,7 +9,7 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
+	import { mapGetters, mapActions } from 'vuex'
 	
 	import CategoryList from './cpns/categoryList.vue'
 	import SearchContent from './cpns/searchContent.vue'
@@ -31,7 +31,13 @@
 				return this.categoryList
 			}
 		},
+		onLoad() {
+			this.getGoodList()
+		},
 		methods: {
+			...mapActions({
+				getGoodList: 'good/getGoodList'
+			}),
 			confirm() {
 				if(this.searchValue === '') this.searchValue = null
 				this.$refs.searchContent.getGoodByKeyword(this.searchValue)

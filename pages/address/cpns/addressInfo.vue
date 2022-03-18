@@ -109,6 +109,8 @@
 		.btn {
 			width: 100%;
 			position: fixed;
+			left: 0;
+			right: 0;
 			bottom: 30rpx;
 		}
 	}

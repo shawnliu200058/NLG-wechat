@@ -15,7 +15,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 	console.log(to.name)
 	if (to.fullPath === '/') to.fullPath = '/pages/login/login'
-	if (to.name !== 'login') {
+	if (to.name !== 'login' && to.name !== 'register') {
 		const token = getToken()
 		if (!token) {
 			next({ name: 'login' });

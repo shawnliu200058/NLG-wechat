@@ -44,8 +44,6 @@
 				content: [{
 					text: '发布供应',
 					iconPath: '../../static/tabbarIcon/category.png'
-				}, {
-					text: '发布求购'
 				}]
 			}
 		},

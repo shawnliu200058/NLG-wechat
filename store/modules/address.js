@@ -5,6 +5,8 @@ import {
 	delDeliveryAddress
 } from '../../api/address.js'
 
+import { getCache } from '@/utils/auth.js'
+
 const state = {
 	addressInfo: [],
 	selectedAddress: null
@@ -20,7 +22,7 @@ const mutations = {
 }
 
 const actions = {
-	addAddress({ commit }, info) {
+	addAddress({ commit, dispatch }, info) {
 		const {
 			addressInfo,
 			userId
@@ -28,10 +30,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			addDeliveryAddress(addressInfo, userId).then(res => {
 
-				getDeliveryAddress().then(res => {
-					console.log(res.data)
-					commit('SET_ADDRESS_INFO', res.data)
-				})
+				dispatch('getAddress')
 
 				resolve(res)
 			}).catch(err => {
@@ -40,8 +39,11 @@ const actions = {
 		})
 	},
 	getAddress({ commit }) {
+		const info = getCache('user')
+		// console.log(info)
 		return new Promise((resolve, reject) => {
-			getDeliveryAddress().then(res => {
+			getDeliveryAddress(info.id).then(res => {
+				// console.log(res.data)
 				commit('SET_ADDRESS_INFO', res.data)
 				resolve(res)
 			}).catch(err => {
@@ -49,36 +51,29 @@ const actions = {
 			})
 		})
 	},
-	modifyAddress({ commit }, info) {
-		console.log(info)
+	modifyAddress({ commit, dispatch }, info) {
+		// console.log(info)
 		const {
 			addressInfo,
 			addressId
 		} = info
 		return new Promise((resolve, reject) => {
 			modifyDeliveryAddress(addressInfo, addressId).then(res => {
+			dispatch('getAddress')
 				
-				getDeliveryAddress().then(res => {
-					console.log(res.data)
-					commit('SET_ADDRESS_INFO', res.data)
-				})
-				
-				resolve(res)
+			resolve(res)
 			}).catch(err => {
 				reject(err)
 			})
 		})
 	},
-	delAddress({ commit }, addressId) {
+	delAddress({ commit, dispatch }, addressId) {
 		console.log(addressId)
 		return new Promise((resolve, reject) => {
 			delDeliveryAddress(addressId).then(res => {
-				console.log(res) 
+				// console.log(res) 
 				
-				getDeliveryAddress().then(res => {
-					console.log(res.data)
-					commit('SET_ADDRESS_INFO', res.data)
-				})
+				dispatch('getAddress')
 				
 				resolve(res)
 			}).catch(err => {
