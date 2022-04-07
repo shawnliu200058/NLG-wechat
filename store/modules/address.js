@@ -28,7 +28,7 @@ const actions = {
 			userId
 		} = info
 		return new Promise((resolve, reject) => {
-			addDeliveryAddress(addressInfo, userId).then(res => {
+			addDeliveryAddress(addressInfo, getCache('user').id).then(res => {
 
 				dispatch('getAddress')
 

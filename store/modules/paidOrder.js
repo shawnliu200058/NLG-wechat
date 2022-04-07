@@ -12,6 +12,7 @@ const mutations = {
 
 const actions = {
 	placeOrder({ dispatch }, info) {
+		console.log(info)
 		return new Promise((resolve, reject) => {
 			placeOrderInfo(info).then(res => {
 				console.log(res.data)
@@ -37,11 +38,13 @@ const actions = {
 		const { userId } = rootGetters
 		return new Promise((resolve, reject) => {
 			getOrderInfo(userId).then(res => {
-				res.data.forEach(item => {
+				// console.log(res.data)
+				const {list} = res.data.orderList
+				list.forEach(item => {
 					item.goodList = JSON.parse(item.good_info)
 					delete item.good_info
 				})
-				commit('SET_MY_ORDER', res.data)
+				commit('SET_MY_ORDER', list)
 				resolve(res)
 			}).catch(err => {
 				reject(err)

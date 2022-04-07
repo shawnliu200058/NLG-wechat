@@ -21,7 +21,7 @@ const actions = {
 			return new Promise((resolve, reject) => {
 				getList('category').then(res => {
 					// console.log(res.data)
-					commit('SET_LIST', res.data)
+					commit('SET_LIST', res.data.categoryList.list)
 					// res.data.forEach(item => {
 					// 	commit('SET_LIST', item)
 					// })

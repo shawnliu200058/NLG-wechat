@@ -16,7 +16,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			getList('good', {offset: 0, limit: 20}).then(res => {
 				// console.log(res)
-				commit('SET_GOOD_LIST', res.data)
+				commit('SET_GOOD_LIST', res.data.goodList.list)
 			})
 		})
 	},

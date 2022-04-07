@@ -100,7 +100,8 @@
 					name: 'address'
 				})
 			},
-			pay() {				
+			pay() {		
+				console.log(this.addressData)
 				if(this.addressData) {
 					let goodList = this.selectedGood
 					goodList.forEach(item => {

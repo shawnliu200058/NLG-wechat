@@ -10,7 +10,9 @@ export function placeOrderInfo(data) {
 
 export function getOrderInfo(userId) {
 	return request({
-		url: `/order/list?userId=${userId}`
+		url: `/order/list`,
+		method: 'POST',
+		data: {userId}
 	})
 }
 export function delOrderInfo(orderId) {

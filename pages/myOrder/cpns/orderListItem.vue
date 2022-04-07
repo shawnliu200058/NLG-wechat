@@ -1,6 +1,7 @@
 <template>
 	<view class="container">
 		<uni-card>
+			<view style="padding-bottom: 20rpx;">订单编号：{{orderItem.orderID}}</view>
 			<template v-for="good in orderItem.goodList">
 				<three-column :key="good.id"
 					:gridPartition="[2, 6, 2]" class="row-divide">

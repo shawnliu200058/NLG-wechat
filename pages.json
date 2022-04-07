@@ -118,7 +118,7 @@
 			"path": "pages/logout/logout",
 			"name": "logout",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "注销用户",
 				"enablePullDownRefresh": false
 			}
 

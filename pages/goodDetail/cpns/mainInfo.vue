@@ -3,7 +3,7 @@
 		<uni-card>
 			<image :src="goodInfo.displayPicUrl" mode="aspectFill"></image>
 			<uni-title type="h3" :title="goodInfo.name"></uni-title>
-			<uni-title title="上报统计数据"></uni-title>
+			<!-- <uni-title title="上报统计数据"></uni-title> -->
 
 			<view class="price-info">
 				<text>￥</text>
