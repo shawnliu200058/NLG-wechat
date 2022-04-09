@@ -2,8 +2,9 @@
 	<view>
 		<view class="overall">
 			<carousel-list :carousels="carouselList"></carousel-list>
-			<uni-notice-bar scrollable single showIcon :speed="80"
-				text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏">
+			<uni-notice-bar scrollable showGetMore required 
+				single more-text="查看更多" :speed="80" @getmore="getMore"
+				:text="announcement.title">
 			</uni-notice-bar>
 			<category></category>
 		</view>
@@ -32,6 +33,7 @@
 	import {
 		getHomeCategoryIcons
 	} from '../../api/home.js'
+	import { getAnnouncement } from '@/api/announcement.js'
 
 	export default {
 		name: 'index',
@@ -41,6 +43,7 @@
 				pattern: {
 					buttonColor: '#1afa29'
 				},
+				announcement: {},
 				content: [{
 					text: '发布供应',
 					iconPath: '../../static/tabbarIcon/category.png'
@@ -59,6 +62,7 @@
 			this.getCarouselList()
 			this.getCategoryList()
 			this.getGoodList()
+			this.setAnnouncement()
 		},
 		methods: {
 			// ...mapActions(['getCategoryList']),
@@ -71,6 +75,16 @@
 				uni.navigateTo({
 					url: '../publish/publish'
 				})
+			},
+			setAnnouncement() {
+				getAnnouncement().then(res => {
+					// console.log(res.data)
+					this.announcement = {...res.data}
+					// console.log(this.announcement)
+				})
+			},
+			getMore() {
+				this.$Router.push({name: 'announcement'})
 			}
 		},
 	}

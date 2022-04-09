@@ -122,6 +122,14 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/announcement/announcement",
+			"name": "announcement",
+			"style": {
+				"navigationBarTitleText": "通告内容",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {
