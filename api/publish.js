@@ -8,6 +8,17 @@ export function createGood(data) {
 	})
 }
 
+export function getPublish(userId, queryInfo = {
+	offset: 0,
+	limit: 10
+}) {
+	return request({
+		url: `/good/getPublish?userId=${userId}`,
+		method: 'POST',
+		data: queryInfo
+	})
+}
+
 // export function getCategoryList() {
 // 	return request({
 // 		url: '/category/list',

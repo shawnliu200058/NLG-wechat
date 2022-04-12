@@ -21,7 +21,9 @@ const getters = {
 	// 我的订单
 	orderInfo: state => state.paidOrder.myOrder,
 	// 我的收藏
-	collectInfo: state =>state.collect.list
+	collectInfo: state =>state.collect.list,
+	// 我的发布
+	publishInfo: state => state.publish.list
 }
 
 export default getters

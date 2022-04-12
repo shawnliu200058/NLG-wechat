@@ -33,6 +33,13 @@
 					}
 				}, 
 				{
+					title: '我的发布',
+					extraIcon: {
+						size: '20',
+						type: 'plus'
+					}
+				}, 
+				{
 					title: '系统设置',
 					extraIcon: {
 						size: '20',
@@ -57,6 +64,10 @@
 				} else if(index == 2) {
 					this.$Router.push({
 						name: 'myCollect'
+					})
+				} else if(index == 3) {
+					this.$Router.push({
+						name: 'myPublish'
 					})
 				}
 			}

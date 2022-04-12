@@ -130,6 +130,14 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/myPublish/myPublish",
+			"name": "myPublish",
+			"style": {
+				"navigationBarTitleText": "我的发布",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {
