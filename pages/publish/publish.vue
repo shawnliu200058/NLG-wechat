@@ -31,12 +31,11 @@
 				</view>
 			</uni-forms-item>
 			<uni-forms-item required name="imgCount" label="展示图">
-				<uni-file-picker fileMediatype="image" :limit="1"
-				@select="selectDisplayPic" @delete="deleteFile"/>
+				<uni-file-picker fileMediatype="image" :limit="1" @select="selectDisplayPic" @delete="deleteFile"
+					v-model="displayPicUrl" />
 			</uni-forms-item>
 			<uni-forms-item label="详情图">
-				<uni-file-picker fileMediatype="image" mode="grid"
-				 @select="selectDetailPic"/>
+				<uni-file-picker fileMediatype="image" mode="grid" @select="selectDetailPic" v-model="detailPicUrl" />
 			</uni-forms-item>
 			<text v-model="formData.imgCount"></text>
 		</uni-forms>
@@ -46,10 +45,14 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
-	
+	import {
+		mapGetters
+	} from 'vuex'
+
 	import rules from './config/rules.js'
-	import { createGood } from '../../api/publish.js'
+	import {
+		createGood
+	} from '../../api/publish.js'
 	import QQMapWX from '@/common/qqmap-wx-jssdk.min.js'
 
 	export default {
@@ -69,24 +72,59 @@
 					imageValue: [],
 					imgCount: 0
 				},
-				displayPicUrl: '',
+				displayPicUrl: {},
 				detailPicUrl: []
 			}
 		},
 		computed: {
-			...mapGetters(['categoryList', 'userId']),
+			...mapGetters(['categoryList', 'userId', 'publishInfo']),
 		},
 		onReady() {
 			this.$refs.form.setRules(rules)
 		},
 		onLoad() {
 			this.getCategory()
+			// console.log(this.$Route.query, this.publishInfo)
+			this.setDefaultInfo()
 		},
 		methods: {
+			setDefaultInfo() {
+				if (this.$Route.query.id) {
+					const goodId = this.$Route.query.id
+					for (const good of this.publishInfo) {
+						if (good.id === goodId) {
+							console.log(good)
+							this.formData.name = good.name
+							this.formData.categoryId = good.category_id
+							this.formData.detail = good.detail
+							this.formData.price = good.price
+							this.formData.unit = good.unit
+							this.formData.stock = good.stock
+							this.formData.specification = good.specification
+							this.formData.address = good.good_address
+							// console.log(good.displayPicUrl)
+							this.displayPicUrl.url = good.displayPicUrl
+							// console.log(good.detailPic)
+							good.detailPic.forEach(item => {
+								this.detailPicUrl.push({
+									url: item.url
+								})
+							})
+							break
+						}
+					}
+				}
+			},
 			getCategory() {
 				this.categoryList.forEach(item => {
-					const {name: text, id: value} = item
-					this.categoryData.push({text, value})
+					const {
+						name: text,
+						id: value
+					} = item
+					this.categoryData.push({
+						text,
+						value
+					})
 				})
 			},
 			getLocation() {
@@ -100,41 +138,49 @@
 			selectDisplayPic(e) {
 				this.formData.imgCount++
 				console.log('选择成功', e.tempFilePaths)
-				this.displayPicUrl = e.tempFilePaths[0]
+				this.displayPicUrl = {
+					url: e.tempFilePaths[0]
+				}
+				console.log(this.displayPicUrl)
 			},
 			selectDetailPic(e) {
-				this.detailPicUrl = e.tempFilePaths
+				console.log(e.tempFilePaths[0])
+				this.detailPicUrl.push({
+					url: e.tempFilePaths[0]
+				})
 			},
 			submit(form) {
 				let that = this
-				
+
 				uni.showModal({
 					title: '提示',
 					content: '是否发布商品信息',
-					success: function (res) {
+					success: function(res) {
 						if (res.confirm) {
 							console.log('用户点击确定');
-							that.$refs.form.validate().then(res=>{
+							that.$refs.form.validate().then(res => {
 								// console.log('表单数据信息：', res);
 								that.formData.userId = that.userId
 								createGood(that.formData).then(res => {
 									console.log(res.data[0].insertId)
 									const goodId = res.data[0].insertId
-									
+
 									that.uploadPic(goodId)
-									
+
 									uni.showToast({
 										title: '提交成功'
 									})
-									that.$Router.push({name: 'index'})
+									that.$Router.push({
+										name: 'index'
+									})
 								})
-									
-							}).catch(err =>{
-									console.log('表单错误信息：', err);
+
+							}).catch(err => {
+								console.log('表单错误信息：', err);
 							})
-								
+
 						} else if (res.cancel) {
-								console.log('用户点击取消');
+							console.log('用户点击取消');
 						}
 					}
 				});
@@ -143,18 +189,19 @@
 				// 上传商品展示图
 				uni.uploadFile({
 					url: `http://localhost:8888/upload/displayPic/${goodId}`, //仅为示例，非真实的接口地址
-					filePath: this.displayPicUrl,
+					filePath: this.displayPicUrl.url,
 					name: 'displayPic',
 					success: (uploadFileRes) => {
 						console.log(uploadFileRes.data);
 					}
 				});
-				
+
 				// 上传商品详情图
-				this.detailPicUrl.forEach(path => {
+				this.detailPicUrl.forEach(item => {
+					console.log(item)
 					uni.uploadFile({
 						url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
-						filePath: path,
+						filePath: item.url,
 						name: 'detailPic',
 						success: (uploadFileRes) => {
 							console.log(uploadFileRes.data);
@@ -165,20 +212,20 @@
 			deleteFile() {
 				this.formData.imgCount--
 			},
-			getNowAddressInfo(curLoc) {
-				const qqMapSdk = new QQMapWX({
-					key: 'MS6BZ-MCUWX-EO346-7R6FM-SYV37-CUB5O',
-				})
-				qqMapSdk.reverseGeocoder({
-					location: {
-						longitude: curLoc.longitude,
-						latitude: curLoc.latitude
-					},
-					success: res => {
-						console.log(res.result.address)
-					}
-				})
-			}
+			// getNowAddressInfo(curLoc) {
+			// 	const qqMapSdk = new QQMapWX({
+			// 		key: 'MS6BZ-MCUWX-EO346-7R6FM-SYV37-CUB5O',
+			// 	})
+			// 	qqMapSdk.reverseGeocoder({
+			// 		location: {
+			// 			longitude: curLoc.longitude,
+			// 			latitude: curLoc.latitude
+			// 		},
+			// 		success: res => {
+			// 			console.log(res.result.address)
+			// 		}
+			// 	})
+			// }
 		}
 	}
 </script>
@@ -188,6 +235,7 @@
 		display: flex;
 		align-items: center;
 		margin-top: 10rpx;
+
 		.uni-icons {
 			margin-right: 8rpx;
 		}

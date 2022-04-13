@@ -17,6 +17,9 @@ const actions = {
 			getList('good', {offset: 0, limit: 20}).then(res => {
 				// console.log(res)
 				commit('SET_GOOD_LIST', res.data.goodList.list)
+				resolve(res)
+			}).catch(err => {
+				reject(err)
 			})
 		})
 	},

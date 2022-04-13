@@ -43,6 +43,9 @@
 <script>
 	import ThreeColumn from '@/layout/three-column/three-column.vue'
 	import DelPublish from './delPublish.vue'
+	
+	import { createNamespacedHelpers, mapGetters  } from 'vuex'
+	const { mapActions } = createNamespacedHelpers('good')
 
 	export default {
 		props: {
@@ -59,17 +62,24 @@
 			// console.log(this.publishItem)
 		},
 		methods: {
+			...mapActions(['getGoodList']),
 			goPublish() {
 				this.$Router.push({
-					name: 'publish'
+					name: 'publish',
+					params: {
+						id: this.publishItem.id
+					}
 				})
 			},
 			goGoodDetail(id) {
-				this.$Router.push({
-					name: 'goodDetail',
-					params: {
-						goodId: id
-					}
+				// 防止跳转到详情页时读不到商品数组
+				this.getGoodList().then(res => {
+					this.$Router.push({
+						name: 'goodDetail',
+						params: {
+							goodId: id
+						}
+					})
 				})
 			}
 		}

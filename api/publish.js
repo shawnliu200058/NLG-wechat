@@ -19,12 +19,12 @@ export function getPublish(userId, queryInfo = {
 	})
 }
 
-// export function getCategoryList() {
-// 	return request({
-// 		url: '/category/list',
-// 		method: 'POST'
-// 	})
-// }
+export function delPublish(goodId) {
+	return request({
+		url: `/good/delPublish?goodId=${goodId}`,
+		method: 'DELETE'
+	})
+}
 
 // export function getHomeCategoryIcons(filename = undefined) {
 // 	return request({

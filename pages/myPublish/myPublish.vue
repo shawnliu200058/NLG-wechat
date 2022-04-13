@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="container">
-			<template v-if="publishInfo">
+			<template v-if="publishInfo.length">
 				<publish-list-item v-for="good in publishInfo" 
 					:publishItem="good" :key="good.id"></publish-list-item>
 			</template>
