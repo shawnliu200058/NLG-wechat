@@ -26,8 +26,10 @@ export function delPublish(goodId) {
 	})
 }
 
-// export function getHomeCategoryIcons(filename = undefined) {
-// 	return request({
-// 		url: `/file/categoryIcon/${filename}`
-// 	})
-// }
+export function updatePublish(goodId, formData) {
+	return request({
+		url: `/good/updatePublish/${goodId}`,
+		method: 'PATCH',
+		data: formData
+	})
+}

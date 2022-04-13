@@ -46,8 +46,12 @@
 
 <script>
 	import {
+		createNamespacedHelpers,
 		mapGetters
 	} from 'vuex'
+	const {
+		mapActions
+	} = createNamespacedHelpers('publish')
 
 	import rules from './config/rules.js'
 	import {
@@ -84,10 +88,11 @@
 		},
 		onLoad() {
 			this.getCategory()
-			// console.log(this.$Route.query, this.publishInfo)
+			console.log(this.$Route.query)
 			this.setDefaultInfo()
 		},
 		methods: {
+			...mapActions(['updatePublishInfo', 'getPublishList']),
 			setDefaultInfo() {
 				if (this.$Route.query.id) {
 					const goodId = this.$Route.query.id
@@ -150,6 +155,8 @@
 				})
 			},
 			submit(form) {
+				if (this.$Route.query.id) return this.updatePublish()
+
 				let that = this
 
 				uni.showModal({
@@ -184,6 +191,23 @@
 						}
 					}
 				});
+			},
+			updatePublish() {
+				// console.log(this.formData)
+				const goodForm = {
+					form: this.formData,
+					goodId: this.$Route.query.id
+				}
+				// console.log(goodForm)
+				this.updatePublishInfo(goodForm).then(res => {
+					this.getPublishList()
+				})
+				// this.$Router.back(1, {
+				// 	success: () => {
+						
+				// 	}
+				// })
+
 			},
 			uploadPic(goodId) {
 				// 上传商品展示图
