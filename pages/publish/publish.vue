@@ -31,11 +31,19 @@
 				</view>
 			</uni-forms-item>
 			<uni-forms-item required name="imgCount" label="展示图">
-				<uni-file-picker fileMediatype="image" :limit="1" @select="selectDisplayPic" @delete="deleteFile"
-					v-model="displayPicUrl" />
+				<u--image class="u-image" :showLoading="true" :src="showDisplayPicUrl" width="224rpx" height="224rpx">
+				</u--image>
+				<uni-file-picker fileMediatype="image" :limit="1" v-model="displayPicUrl" @select="selectDisplayPic"
+					@delete="deleteFile" />
 			</uni-forms-item>
 			<uni-forms-item label="详情图">
-				<uni-file-picker fileMediatype="image" mode="grid" @select="selectDetailPic" v-model="detailPicUrl" />
+				<view class="u-image-container">
+					<template v-for="item in showDetailPic">
+						<u--image class="u-image" :showLoading="true" :key="item.url" :src="item.url" width="224rpx"
+							height="224rpx"></u--image>
+					</template>
+				</view>
+				<uni-file-picker fileMediatype="image" mode="grid" v-model="detailPicUrl" @select="selectDetailPic" />
 			</uni-forms-item>
 			<text v-model="formData.imgCount"></text>
 		</uni-forms>
@@ -57,6 +65,9 @@
 	import {
 		createGood
 	} from '../../api/publish.js'
+	import {
+		showToastBack
+	} from '@/hook/index.js'
 	import QQMapWX from '@/common/qqmap-wx-jssdk.min.js'
 
 	export default {
@@ -76,6 +87,8 @@
 					imageValue: [],
 					imgCount: 0
 				},
+				showDisplayPicUrl: '',
+				showDetailPic: [],
 				displayPicUrl: {},
 				detailPicUrl: []
 			}
@@ -108,13 +121,17 @@
 							this.formData.specification = good.specification
 							this.formData.address = good.good_address
 							// console.log(good.displayPicUrl)
-							this.displayPicUrl.url = good.displayPicUrl
+							this.showDisplayPicUrl = good.displayPicUrl
 							// console.log(good.detailPic)
 							good.detailPic.forEach(item => {
-								this.detailPicUrl.push({
+								// this.detailPicUrl.push({
+								// 	url: item.url
+								// })
+								this.showDetailPic.push({
 									url: item.url
 								})
 							})
+							// console.log(this.detailPicUrl)
 							break
 						}
 					}
@@ -142,17 +159,22 @@
 			},
 			selectDisplayPic(e) {
 				this.formData.imgCount++
-				console.log('选择成功', e.tempFilePaths)
+				// console.log('选择成功', e.tempFilePaths)
+				// this.displayPicUrl = {
+				// 	path: e.tempFilePaths[0]
+				// }
 				this.displayPicUrl = {
 					url: e.tempFilePaths[0]
 				}
-				console.log(this.displayPicUrl)
+				console.log(this.displayPicUrl.url)
+				// console.log(URL.createObjectURL(this.displayPicUrl.url))
 			},
 			selectDetailPic(e) {
-				console.log(e.tempFilePaths[0])
+				// console.log(e.tempFilePaths[0])
 				this.detailPicUrl.push({
 					url: e.tempFilePaths[0]
 				})
+				console.log(this.detailPicUrl)
 			},
 			submit(form) {
 				if (this.$Route.query.id) return this.updatePublish()
@@ -194,46 +216,67 @@
 			},
 			updatePublish() {
 				// console.log(this.formData)
+				const goodId = this.$Route.query.id
 				const goodForm = {
 					form: this.formData,
-					goodId: this.$Route.query.id
+					goodId
 				}
 				// console.log(goodForm)
 				this.updatePublishInfo(goodForm).then(res => {
-					this.getPublishList()
+					this.uploadPic(goodId)
 				})
 				// this.$Router.back(1, {
 				// 	success: () => {
-						
+
 				// 	}
 				// })
 
 			},
 			uploadPic(goodId) {
+				console.log(this.displayPicUrl.url)
+				console.log(this.detailPicUrl)
+				let that = this
 				// 上传商品展示图
-				uni.uploadFile({
-					url: `http://localhost:8888/upload/displayPic/${goodId}`, //仅为示例，非真实的接口地址
-					filePath: this.displayPicUrl.url,
-					name: 'displayPic',
-					success: (uploadFileRes) => {
-						console.log(uploadFileRes.data);
-					}
-				});
-
-				// 上传商品详情图
-				this.detailPicUrl.forEach(item => {
-					console.log(item)
+				if (this.displayPicUrl.url) {
+					console.log(this.detailPicUrl.length)
 					uni.uploadFile({
-						url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
-						filePath: item.url,
-						name: 'detailPic',
+						url: `http://localhost:8888/upload/displayPic/${goodId}`, //仅为示例，非真实的接口地址
+						filePath: this.displayPicUrl.url,
+						name: 'displayPic',
+						formData: {
+							isDelDetailPic: this.detailPicUrl.length
+						},
 						success: (uploadFileRes) => {
 							console.log(uploadFileRes.data);
+
+							// 上传商品详情图
+							// console.log(this.detailPicUrl.length)
+							// console.log(123)
+							this.detailPicUrl.forEach(item => {
+								// console.log(item.path)
+								uni.uploadFile({
+									url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
+									filePath: item.path,
+									name: 'detailPic',
+									success: (uploadFileRes) => {
+										// console.log(uploadFileRes.data);
+										this.getPublishList().then(res => {
+											showToastBack(uni, '保存成功', that, 200)
+											// uni.redirectTo({
+											// 	name: 'myPublish'
+											// })
+										})
+									}
+								});
+							})
+
 						}
 					});
-				})
+				}
+
 			},
-			deleteFile() {
+			deleteFile(e) {
+				// console.log(e)
 				this.formData.imgCount--
 			},
 			// getNowAddressInfo(curLoc) {
@@ -263,5 +306,13 @@
 		.uni-icons {
 			margin-right: 8rpx;
 		}
+	}
+
+	.u-image-container {
+		display: flex;
+	}
+
+	.u-image {
+		padding: 0 20rpx 20rpx 0;
 	}
 </style>

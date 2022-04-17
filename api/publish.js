@@ -21,7 +21,7 @@ export function getPublish(userId, queryInfo = {
 
 export function delPublish(goodId) {
 	return request({
-		url: `/good/delPublish?goodId=${goodId}`,
+		url: `/good/delPublish/${goodId}`,
 		method: 'DELETE'
 	})
 }

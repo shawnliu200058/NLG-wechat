@@ -2,7 +2,7 @@
 	<view class="container">
 		<uni-card>
 			<div @click="goGoodDetail(publishItem.id)">
-				<three-column :gridPartition="[2, 6, 2]" class="row-divide">
+				<three-column :gridPartition="[2, 5, 3]" class="row-divide">
 					<template #column1>
 						<image :src="publishItem.displayPicUrl" mode="aspectFill" class="img"></image>
 					</template>
