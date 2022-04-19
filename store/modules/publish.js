@@ -12,6 +12,9 @@ const mutations = {
 		// 	state.list.push(item)
 		// })
 		state.list = publishList
+	},
+	CLEAR_PUBLISH_LIST: (state) => {
+		state.list.length = 0
 	}
 }
 
@@ -19,6 +22,7 @@ const actions = {
 	getPublishList({ commit, state }) {
 		// console.log('123131313')
 		return new Promise((resolve, reject) => {
+			commit('CLEAR_PUBLISH_LIST')
 			getPublish(getCache('user').id).then(res => {
 				console.log(res.data)
 				commit('SET_PUBLISH_LIST', res.data.publishList.list)

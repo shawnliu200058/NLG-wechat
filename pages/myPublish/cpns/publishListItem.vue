@@ -5,6 +5,7 @@
 				<three-column :gridPartition="[2, 5, 3]" class="row-divide">
 					<template #column1>
 						<image :src="publishItem.displayPicUrl" mode="aspectFill" class="img"></image>
+						<!-- <image :src="publishItem.detailPic[0].url" mode="aspectFill" class="img"></image> -->
 					</template>
 					<template #column2>
 						<view class="text-info left-align">
@@ -59,7 +60,7 @@
 			DelPublish
 		},
 		beforeMount() {
-			// console.log(this.publishItem)
+			console.log(this.publishItem)
 		},
 		methods: {
 			...mapActions(['getGoodList']),

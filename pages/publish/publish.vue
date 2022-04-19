@@ -88,6 +88,7 @@
 					imgCount: 0
 				},
 				showDisplayPicUrl: '',
+				// showDisplayPic: [],
 				showDetailPic: [],
 				displayPicUrl: {},
 				detailPicUrl: []
@@ -122,11 +123,9 @@
 							this.formData.address = good.good_address
 							// console.log(good.displayPicUrl)
 							this.showDisplayPicUrl = good.displayPicUrl
+							// this.showDisplayPic.push(good.displayPicUrl)
 							// console.log(good.detailPic)
 							good.detailPic.forEach(item => {
-								// this.detailPicUrl.push({
-								// 	url: item.url
-								// })
 								this.showDetailPic.push({
 									url: item.url
 								})
@@ -166,8 +165,7 @@
 				this.displayPicUrl = {
 					url: e.tempFilePaths[0]
 				}
-				console.log(this.displayPicUrl.url)
-				// console.log(URL.createObjectURL(this.displayPicUrl.url))
+				// console.log(this.displayPicUrl.url)
 			},
 			selectDetailPic(e) {
 				// console.log(e.tempFilePaths[0])
@@ -225,55 +223,75 @@
 				this.updatePublishInfo(goodForm).then(res => {
 					this.uploadPic(goodId)
 				})
-				// this.$Router.back(1, {
-				// 	success: () => {
-
-				// 	}
-				// })
-
 			},
 			uploadPic(goodId) {
-				console.log(this.displayPicUrl.url)
-				console.log(this.detailPicUrl)
+				// console.log(this.displayPicUrl.url)
+				// console.log(this.detailPicUrl)
 				let that = this
 				// 上传商品展示图
 				if (this.displayPicUrl.url) {
 					console.log(this.detailPicUrl.length)
 					uni.uploadFile({
-						url: `http://localhost:8888/upload/displayPic/${goodId}`, //仅为示例，非真实的接口地址
+						url: `http://localhost:8888/upload/displayPic/${goodId}?isDelDetailPic=${this.detailPicUrl.length}`, //仅为示例，非真实的接口地址
 						filePath: this.displayPicUrl.url,
 						name: 'displayPic',
-						formData: {
-							isDelDetailPic: this.detailPicUrl.length
-						},
+						// formData: {
+						// 	isDelDetailPic: this.detailPicUrl.length
+						// },
 						success: (uploadFileRes) => {
-							console.log(uploadFileRes.data);
+							// console.log(uploadFileRes.data);
+
+							// 不更新详情图的情况
+							if (!this.detailPicUrl.length) {
+								this.getPublishList().then(res => {
+									showToastBack(uni, '保存成功', that, 200)
+								})
+								// this.$Router.replaceAll('/pages/myPublish/myPublish')
+							}
 
 							// 上传商品详情图
 							// console.log(this.detailPicUrl.length)
-							// console.log(123)
-							this.detailPicUrl.forEach(item => {
-								// console.log(item.path)
-								uni.uploadFile({
-									url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
-									filePath: item.path,
-									name: 'detailPic',
-									success: (uploadFileRes) => {
-										// console.log(uploadFileRes.data);
-										this.getPublishList().then(res => {
-											showToastBack(uni, '保存成功', that, 200)
-											// uni.redirectTo({
-											// 	name: 'myPublish'
-											// })
-										})
-									}
-								});
-							})
-
+							else {
+								this.detailPicUrl.forEach(item => {
+									// console.log(item.path)
+									uni.uploadFile({
+										url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
+										filePath: item.path,
+										name: 'detailPic',
+										success: (uploadFileRes) => {
+											// console.log(uploadFileRes.data);
+											this.getPublishList().then(res => {
+												showToastBack(uni, '保存成功', that,
+													200)
+												// uni.redirectTo({
+												// 	name: 'myPublish'
+												// })
+											})
+										}
+									});
+								})
+							}
 						}
 					});
+				} else if (this.detailPicUrl.length) { // 只更新详情图
+					this.detailPicUrl.forEach(item => {
+						console.log(item.path)
+						uni.uploadFile({
+							url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
+							filePath: item.path,
+							name: 'detailPic',
+							success: (uploadFileRes) => {
+								this.getPublishList().then(res => {
+									showToastBack(uni, '保存成功', that, 200)
+								})
+							}
+						});
+					})
+				} else { // 更新除图片以外的信息
+					this.getPublishList().then(res => {
+						showToastBack(uni, '保存成功', that, 200)
+					})
 				}
-
 			},
 			deleteFile(e) {
 				// console.log(e)

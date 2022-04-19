@@ -30,6 +30,7 @@
 		components: {PublishListItem},
 		onLoad() {
 			this.getPublishList()
+			// console.log(this.publishInfo)
 		},
 		computed: {
 			...mapGetters(['publishInfo'])
