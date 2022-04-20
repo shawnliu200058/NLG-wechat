@@ -1,8 +1,8 @@
 <template>
 	<view class="overall">
 		<top></top>
-		<middle></middle>
-		<bottom></bottom>
+		<!-- <middle></middle> -->
+		<bottom style="margin-top: 20rpx;"></bottom>
 	</view>
 </template>
 

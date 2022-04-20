@@ -32,7 +32,7 @@ export default {
 		rules: [
 			{
 				required: true,
-				errorMessage: '请输入商品价格'
+				errorMessage: '请输入商品价格'  
 			},
 			{
 				format: 'number',

@@ -118,7 +118,7 @@
 			"path": "pages/logout/logout",
 			"name": "logout",
 			"style": {
-				"navigationBarTitleText": "注销用户",
+				"navigationBarTitleText": "系统设置",
 				"enablePullDownRefresh": false
 			}
 
@@ -135,6 +135,14 @@
 			"name": "myPublish",
 			"style": {
 				"navigationBarTitleText": "我的发布",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/changePwd/changePwd",
+			"name": "changePwd",
+			"style": {
+				"navigationBarTitleText": "修改密码",
 				"enablePullDownRefresh": false
 			}
 

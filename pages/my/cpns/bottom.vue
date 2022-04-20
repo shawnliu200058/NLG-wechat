@@ -1,5 +1,5 @@
 <template>
-	<view class="">
+	<view class="container">
 		<uni-list v-for="(item, index) in listItems" :key="index">
 			<view @click="goToPage(index)">
 				<uni-list-item :title="item.title" show-extra-icon
@@ -75,5 +75,5 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
 </style>
