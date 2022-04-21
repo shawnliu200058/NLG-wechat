@@ -10,10 +10,24 @@ export function createUser(data) {
 	})
 }
 
+export function updateUserInfo(data) {
+	return request({
+		url: `/user/${getCache('user').id}`,
+		method: 'PATCH',
+		data
+	})
+}
+
 export function changePwd(data) {
 	return request({
 		url: `/user/pwd/${getCache('user').id}`,
 		method: 'PATCH',
 		data
+	})
+}
+
+export function retriveInfo() {
+	return request({
+		url: `/user/info/${getCache('user').id}`
 	})
 }

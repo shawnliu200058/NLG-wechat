@@ -28,7 +28,8 @@
 					extraIcon: {
 						size: '20',
 						type: 'person'
-					}
+					},
+					path: '/pages/personalData/personalData'
 				}, {
 					title: '修改密码',
 					extraIcon: {

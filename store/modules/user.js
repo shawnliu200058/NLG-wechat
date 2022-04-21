@@ -1,4 +1,4 @@
-import { createUser } from '../../api/my.js'
+import { createUser, retriveInfo } from '../../api/my.js'
 import { loginUser } from '@/api/login.js'
 import { setToken, setCache, getCache } from '@/utils/auth.js'
 
@@ -7,7 +7,9 @@ const state = {
 	openid: '',
 	nickName: '',
 	gender: '',
-	avatarUrl: ''
+	avatarUrl: '',
+	birthday: '',
+	email: ''
 }
 
 const mutations = {
@@ -25,6 +27,12 @@ const mutations = {
 	},
 	SET_AVATAR_URL: (state, avatarUrl) => {
 		state.avatarUrl = avatarUrl
+	},
+	SET_BIRTHDAY: (state, birthday) => {
+		state.birthday = birthday
+	},
+	SET_EMAIL: (state, email) => {
+		state.email = email
 	}
 }
 
@@ -33,13 +41,18 @@ const actions = {
 	login({ commit }, user) {
 		// console.log(user)
 		// const { name, password } = user
-		return new Promise((resolve, res) => {
+		return new Promise((resolve, reject) => {
 			loginUser(user).then(res => {
-				const { id, name, token} = res.data
+				console.log(res.data)
+				const { id, nickName, gender, birthday, email, avatarUrl, token} = res.data
 				commit('SET_ID', id)
-				commit('SET_NICK_NAME', name)
+				commit('SET_NICK_NAME', nickName)
+				commit('SET_AVATAR_URL', avatarUrl)
+				commit('SET_GENDER', gender)
+				commit('SET_BIRTHDAY', birthday)
+				commit('SET_EMAIL', email)
 				setToken(token)
-				setCache('user', {id, name})
+				setCache('user', res.data)
 				resolve(res)
 			}).catch(err => {
 				reject(err)
@@ -65,10 +78,32 @@ const actions = {
 	loadUserInfo({ commit }) {
 		const info = getCache('user')
 		if(info) {
-			const { id, name } = info
+			const { id, nickName, gender, birthday, email, avatarUrl, token} = info
 			commit('SET_ID', id)
-			commit('SET_NICK_NAME', name)
+			commit('SET_NICK_NAME', nickName)
+			commit('SET_AVATAR_URL', avatarUrl)
+			commit('SET_GENDER', gender)
+			commit('SET_BIRTHDAY', birthday)
+			commit('SET_EMAIL', email)
 		} 
+	},
+	retriveUserInfo({ commit }) {
+		return new Promise((resolve, reject) => {
+			retriveInfo().then(res => {
+				console.log(res.data)
+				const { id, nickName, gender, birthday, email, avatarUrl} = res.data
+				commit('SET_ID', id)
+				commit('SET_NICK_NAME', nickName)
+				commit('SET_AVATAR_URL', avatarUrl)
+				commit('SET_GENDER', gender)
+				commit('SET_BIRTHDAY', birthday)
+				commit('SET_EMAIL', email)
+				setCache('user', res.data)
+				resolve(res)
+			}).catch(err => {
+				reject(err)
+			})
+		})
 	}
 }
 

@@ -146,6 +146,14 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/personalData/personalData",
+			"name": "personalData",
+			"style": {
+				"navigationBarTitleText": "个人资料",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {

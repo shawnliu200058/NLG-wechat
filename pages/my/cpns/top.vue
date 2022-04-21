@@ -1,5 +1,5 @@
 <template>
-	<view class="container" @click="$Router.push({name: 'logout'})">
+	<view class="container">
 		<image :src="avatar_url ? avatar_url
 			: '../../static/avatar/mmexport02d1443711db4c6508cc18aca6ebf25f.png'" mode=""></image>
 		<text>{{nick_name}}</text>
