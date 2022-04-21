@@ -134,7 +134,8 @@
 					console.log(this.formData)
 					updateUserInfo(this.formData).then(res => {
 						// console.log(res.data)
-						if(this.curAvatar) this.uploadAvatar()
+						if(this.curAvatar && this.curAvatar !== this.defaultAvatar 
+							&& this.curAvatar !== this.userData.avatarUrl) this.uploadAvatar()
 						uni.showToast({
 							icon: 'success',
 							title: '修改资料成功',
