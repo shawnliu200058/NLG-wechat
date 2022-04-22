@@ -31,7 +31,7 @@
 				</view>
 			</uni-forms-item>
 			<uni-forms-item required name="imgCount" label="展示图">
-				<u--image class="u-image" :showLoading="true" :src="showDisplayPicUrl" width="224rpx" height="224rpx">
+				<u--image v-if="showDisplayPicUrl" class="u-image" :showLoading="true" :src="showDisplayPicUrl" width="224rpx" height="224rpx">
 				</u--image>
 				<uni-file-picker fileMediatype="image" :limit="1" v-model="displayPicUrl" @select="selectDisplayPic"
 					@delete="deleteFile" />
@@ -87,7 +87,7 @@
 					imageValue: [],
 					imgCount: 0
 				},
-				showDisplayPicUrl: '',
+				showDisplayPicUrl: null,
 				// showDisplayPic: [],
 				showDetailPic: [],
 				displayPicUrl: {},

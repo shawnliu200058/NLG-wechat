@@ -17,7 +17,7 @@
 				</uni-forms-item>
 				<uni-forms-item label="性别" name="gender">
 					<radio-group name="sex" @change="radioChange" class="radio-group">
-						<label v-for="item in radio">
+						<label v-for="item in radio" :key="item.value">
 							<radio :value="item.value.toString()" :checked="item.isChecked" /><text
 								class="text">{{item.name}}</text>
 							<!-- <radio value="1" /><text class="text">女</text>
@@ -133,8 +133,14 @@
 					// console.log(res)
 					console.log(this.formData)
 					updateUserInfo(this.formData).then(res => {
-						// console.log(res.data)
-						if(this.curAvatar && this.curAvatar !== this.defaultAvatar 
+						console.log(res.data)
+						if(res.data.errMsg) {
+							return uni.showToast({
+								icon: 'error',
+								title: '该用户名已存在'
+							})
+						}
+						if(this.curAvatar && this.curAvatar !== this.defaultAvatar
 							&& this.curAvatar !== this.userData.avatarUrl) this.uploadAvatar()
 						uni.showToast({
 							icon: 'success',
