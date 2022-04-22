@@ -40,10 +40,10 @@ const actions = {
 	},
 	getAddress({ commit }) {
 		const info = getCache('user')
-		// console.log(info)
+		// console.log(34242342)
 		return new Promise((resolve, reject) => {
 			getDeliveryAddress(info.id).then(res => {
-				// console.log(res.data)
+				console.log(res.data, 'address')
 				commit('SET_ADDRESS_INFO', res.data)
 				resolve(res)
 			}).catch(err => {

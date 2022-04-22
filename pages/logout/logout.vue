@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import { removeToken } from '@/utils/auth.js'
+	import { removeToken, removeCache } from '@/utils/auth.js'
 	
 	export default {
 		data() {
@@ -43,6 +43,7 @@
 		methods: {
 			logout() {
 				removeToken()
+				removeCache()
 				this.$Router.push({name: 'login'})
 			}
 		}

@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { router } from '../router.js'
+import {
+	router
+} from '../router.js'
 import getters from './getters.js'
 
 Vue.use(Vuex)
@@ -11,11 +13,11 @@ Vue.use(Vuex)
 // 参数三：查找后缀名开头为 js 的文件
 const modulesFiles = require.context('./modules', true, /\.js$/)
 const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-  // set './app.js' => 'app'
-  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-  const value = modulesFiles(modulePath)
-  modules[moduleName] = value.default
-  return modules
+	// set './app.js' => 'app'
+	const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+	const value = modulesFiles(modulePath)
+	modules[moduleName] = value.default
+	return modules
 }, {})
 
 const store = new Vuex.Store({
@@ -24,15 +26,16 @@ const store = new Vuex.Store({
 })
 
 export function retriveData() {
-	console.log(router.$route.history.current.fullPath)
+	// console.log(router.$route.history.current.fullPath)
 	const curPath = router.$route.history.current.fullPath
-	if(curPath !== '/' && curPath !== '/pages/register/register') {
-		store.dispatch('category/getCategoryList')
+	// console.log(curPath, 123)
+	if (curPath !== '/' && curPath !== '/pages/register/register') {
+		// store.dispatch('category/getCategoryList')
 		store.dispatch('good/getGoodList')
-		store.dispatch('address/getAddress')
 		store.dispatch('user/loadUserInfo')
+		store.dispatch('address/getAddress')
 	}
+
 }
 
 export default store
-

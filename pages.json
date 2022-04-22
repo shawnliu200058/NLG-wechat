@@ -153,9 +153,17 @@
 				"navigationBarTitleText": "个人资料",
 				"enablePullDownRefresh": false
 			}
-
 		}
-	],
+	    ,{
+            "path" : "pages/alipay/alipay",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "农乐购",

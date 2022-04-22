@@ -131,7 +131,7 @@
 			submit() {
 				this.$refs.form.validate().then(res => {
 					// console.log(res)
-					console.log(this.formData)
+					// console.log(this.formData)
 					updateUserInfo(this.formData).then(res => {
 						console.log(res.data)
 						if(res.data.errMsg) {

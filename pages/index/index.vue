@@ -34,6 +34,8 @@
 		getHomeCategoryIcons
 	} from '../../api/home.js'
 	import { getAnnouncement } from '@/api/announcement.js'
+	
+	import { getCache } from '@/utils/auth.js'
 
 	export default {
 		name: 'index',
@@ -63,13 +65,16 @@
 			this.getCategoryList()
 			this.getGoodList()
 			this.setAnnouncement()
+			this.getAddress()
+			// console.log(getCache('user').id)
 		},
 		methods: {
 			// ...mapActions(['getCategoryList']),
 			...mapActions({
 				getCarouselList: 'carousel/getCarousel',
 				getCategoryList: 'category/getCategoryList',
-				getGoodList: 'good/getGoodList'
+				getGoodList: 'good/getGoodList',
+				getAddress: 'address/getAddress'
 			}),
 			trigger(e) {
 				uni.navigateTo({

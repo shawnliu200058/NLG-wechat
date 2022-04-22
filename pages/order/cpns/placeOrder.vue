@@ -87,7 +87,7 @@
 			}
 		},
 		beforeMount() {
-			// console.log([this.unpaidGood])
+			console.log(this.selectedGood)
 		},
 		methods: {
 			...mapActions(['placeOrder']),
@@ -101,7 +101,7 @@
 				})
 			},
 			pay() {		
-				console.log(this.addressData)
+				// console.log(this.addressData)
 				if(this.addressData) {
 					let goodList = this.selectedGood
 					goodList.forEach(item => {
@@ -114,12 +114,20 @@
 						totalPrice: this.orderPrice,
 						remark: this.remark
 					}).then(res => {
+						// console.log(res.data.url)
+						// const url = encodeURIComponent(res.data.url)
+						// // console.log(url)
+						// uni.navigateTo({
+						// 	url: `/pages/alipay/alipay?url=${url}`
+						// })
+						window.location.href= res.data.url
+						// plus.runtime.openURL(res.data.url)
 						// 支付成功后清空购物车和订单页信息
 						this.clearCartList()
 						this.clearUnpaidGood()
-						this.$Router.push({
-							name: 'paymentSucceeded'
-						})
+						// this.$Router.push({
+						// 	name: 'paymentSucceeded'
+						// })
 					})
 				}
 			}
