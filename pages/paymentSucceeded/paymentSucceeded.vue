@@ -19,11 +19,17 @@
 		components: {
 			CircleBtn
 		},
+		beforeMount() {
+			this.generateOrder()
+		},
 		mounted() {
 			var a = document.getElementsByClassName('uni-page-head-hd')[0]
 			a.style.display = 'none';
 		},
 		methods: {
+			generateOrder() {
+				console.log(this.$Route.query)
+			},
 			goToHome() {
 				this.$Router.push({
 					name: 'index'

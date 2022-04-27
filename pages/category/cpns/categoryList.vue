@@ -13,15 +13,17 @@
 			
 			<view class="rightScroll" v-if="categoryGood[0].id">
 				<view class="bigConScro" v-for="(item,index) in categoryGood" :key="index">
-					<view class="good-content" @click="goGoodDetail(item.id)">
-						<image :src="item.displayPicUrl" mode="aspectFill"></image>
-						<view class="good-item">
-							<view class="common-padding">{{item.name}}</view>
-							<view class="stock common-padding">库存：{{item.stock}}</view>
-							<uni-title :title="`￥${item.price.toFixed(2)}/${item.unit}`" type="h4" color="red"></uni-title>
-							<uni-icons type="cart" size="24" color="red"></uni-icons>
+					<template v-if="item.status">
+						<view class="good-content" @click="goGoodDetail(item.id)">
+							<image :src="item.displayPicUrl" mode="aspectFill"></image>
+							<view class="good-item">
+								<view class="common-padding">{{item.name}}</view>
+								<view class="stock common-padding">库存：{{item.stock}}</view>
+								<uni-title :title="`￥${item.price.toFixed(2)}/${item.unit}`" type="h4" color="red"></uni-title>
+								<uni-icons type="cart" size="24" color="red"></uni-icons>
+							</view>
 						</view>
-					</view>
+					</template>
 				</view>
 			</view>
 		</view>
@@ -51,15 +53,20 @@
 		watch: {
 			selectedIndex: {
 				handler(newval, oldval) {
+					// console.log(newVal, oldval)
 					this.chooseClick(newval)
 				},
 				immediate: true
 			}
 		},
+		beforeMount() {
+			// console.log(this.categoryList)
+		},
 		methods: {
 			chooseClick(index) {
 				this.isActive = index;
 				this.categoryGood = this.categoryList[index].goods
+				console.log(this.categoryGood)
 			},
 			goGoodDetail(id) {
 				this.$Router.push({

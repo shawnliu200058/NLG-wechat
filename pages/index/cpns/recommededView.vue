@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<template v-for="item in list">
+		<template v-for="item in list" v-if="item.status">
 			<view class="good-item" :key="item.id" @click="toDetail(item.id)">
 				<image :src="item.displayPicUrl" mode=""></image>
 				<view class="title">

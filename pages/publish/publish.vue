@@ -2,38 +2,41 @@
 	<view class="overall">
 		<uni-forms ref="form" :modelValue="formData" label-position="top" :labelWidth="150">
 			<uni-forms-item required label="名称" name="name">
-				<uni-easyinput type="text" v-model="formData.name" placeholder="请输入商品名称" />
+				<uni-easyinput :disabled="!isAudit" type="text" v-model="formData.name" placeholder="请输入商品名称" />
 			</uni-forms-item>
 			<uni-forms-item required name="categoryId" label="类别">
-				<uni-data-picker :localdata="categoryData" v-model="formData.categoryId" placeholder="请选择商品类别"
+				<uni-data-picker v-if="isAudit" :localdata="categoryData" v-model="formData.categoryId" placeholder="请选择商品类别"
 					popup-title="商品类别"></uni-data-picker>
+				<uni-easyinput v-else :disabled="!isAudit" :placeholder="curCatagory" />
 			</uni-forms-item>
 			<uni-forms-item label="商品详情" name="detail">
-				<uni-easyinput type="textarea" v-model="formData.detail" placeholder="请输入商品详情" trim></uni-easyinput>
+				<uni-easyinput :disabled="!isAudit" type="textarea" v-model="formData.detail" placeholder="请输入商品详情" trim></uni-easyinput>
 			</uni-forms-item>
 			<uni-forms-item required name="price" label="价格(单位:元)">
-				<uni-easyinput type="number" v-model="formData.price" placeholder="请输入价格"></uni-easyinput>
+				<uni-easyinput :disabled="!isAudit" type="number" v-model="formData.price" placeholder="请输入价格"></uni-easyinput>
 			</uni-forms-item>
 			<uni-forms-item required name="unit" label="计量单位">
-				<uni-easyinput placeholder="请输入计量单位" v-model="formData.unit"></uni-easyinput>
+				<uni-easyinput :disabled="!isAudit" placeholder="请输入计量单位" v-model="formData.unit"></uni-easyinput>
 			</uni-forms-item>
 			<uni-forms-item required name="specification" label="规格">
-				<uni-easyinput placeholder="请输入规格" v-model="formData.specification"></uni-easyinput>
+				<uni-easyinput :disabled="!isAudit" placeholder="请输入规格" v-model="formData.specification"></uni-easyinput>
 			</uni-forms-item>
 			<uni-forms-item required name="stock" label="库存">
-				<uni-number-box :min="1" :max="99999" v-model="formData.stock"></uni-number-box>
+				<uni-number-box :disabled="!isAudit" :min="1" :max="99999" v-model="formData.stock"></uni-number-box>
 			</uni-forms-item>
 			<uni-forms-item required name="address" label="发货地址">
-				<uni-easyinput placeholder="请输入发货地址" v-model="formData.address"></uni-easyinput>
+				<uni-easyinput :disabled="!isAudit" placeholder="请输入发货地址" v-model="formData.address"></uni-easyinput>
 				<view @click="getLocation" class="position">
-					<uni-icons type="location-filled" size="22"></uni-icons>
-					<text>定位</text>
+					<template v-if="isAudit">
+						<uni-icons type="location-filled" size="22"></uni-icons>
+						<text>定位</text>
+					</template>
 				</view>
 			</uni-forms-item>
 			<uni-forms-item required name="imgCount" label="展示图">
 				<u--image v-if="showDisplayPicUrl" class="u-image" :showLoading="true" :src="showDisplayPicUrl" width="224rpx" height="224rpx">
 				</u--image>
-				<uni-file-picker fileMediatype="image" :limit="1" v-model="displayPicUrl" @select="selectDisplayPic"
+				<uni-file-picker v-if="isAudit" fileMediatype="image" :limit="1" v-model="displayPicUrl" @select="selectDisplayPic"
 					@delete="deleteFile" />
 			</uni-forms-item>
 			<uni-forms-item label="详情图">
@@ -43,7 +46,7 @@
 							height="224rpx"></u--image>
 					</template>
 				</view>
-				<uni-file-picker fileMediatype="image" mode="grid" v-model="detailPicUrl" @select="selectDetailPic" />
+				<uni-file-picker v-if="isAudit" fileMediatype="image" mode="grid" v-model="detailPicUrl" @select="selectDetailPic" />
 			</uni-forms-item>
 			<text v-model="formData.imgCount"></text>
 		</uni-forms>
@@ -91,7 +94,10 @@
 				// showDisplayPic: [],
 				showDetailPic: [],
 				displayPicUrl: {},
-				detailPicUrl: []
+				detailPicUrl: [],
+				// 商品是否处于审核完成状态，若不是，则不可编辑
+				isAudit: true,
+				curCatagory: ''
 			}
 		},
 		computed: {
@@ -102,12 +108,17 @@
 		},
 		onLoad() {
 			this.getCategory()
-			console.log(this.$Route.query)
+			// console.log(this.$Route.query)
 			this.setDefaultInfo()
 		},
 		methods: {
 			...mapActions(['updatePublishInfo', 'getPublishList']),
 			setDefaultInfo() {
+				// console.log(this.$Route.query.isAudit)
+				if(this.$Route.query.isAudit === false) {
+					this.isAudit = false
+				}
+				// console.log(this.isAudit)
 				if (this.$Route.query.id) {
 					const goodId = this.$Route.query.id
 					for (const good of this.publishInfo) {
@@ -115,6 +126,11 @@
 							console.log(good)
 							this.formData.name = good.name
 							this.formData.categoryId = good.category_id
+							console.log(this.categoryData)
+							for(const item of this.categoryData) {
+								if(item.value === good.category_id) this.curCatagory = item.text
+							}
+							console.log(this.curCatagory)
 							this.formData.detail = good.detail
 							this.formData.price = good.price
 							this.formData.unit = good.unit

@@ -3,7 +3,7 @@
 		<uni-search-bar v-model="searchValue" :radius="100" placeholder="搜索商品名称" 
 			@focus="isSearch = true" @confirm="confirm" @cancel="isSearch = false">
 			</uni-search-bar>
-		<CategoryList v-if="!isSearch" :categoryList="list"></CategoryList>
+		<CategoryList v-if="!isSearch && list.length" :categoryList="list"></CategoryList>
 		<search-content v-else ref="searchContent"></search-content>
 	</view>
 </template>
@@ -33,10 +33,13 @@
 		},
 		onLoad() {
 			this.getGoodList()
+			this.getCategoryList()
+			// console.log(this.categoryList, 234)
 		},
 		methods: {
 			...mapActions({
-				getGoodList: 'good/getGoodList'
+				getGoodList: 'good/getGoodList',
+				getCategoryList: 'category/getCategoryList'
 			}),
 			confirm() {
 				if(this.searchValue === '') this.searchValue = null
