@@ -30,7 +30,7 @@ export function retriveData() {
 	const curPath = router.$route.history.current.fullPath
 	// console.log(curPath, 123)
 	if (curPath !== '/' && curPath !== '/pages/register/register') {
-		// store.dispatch('category/getCategoryList')
+		store.dispatch('category/getCategoryList')
 		store.dispatch('good/getGoodList')
 		store.dispatch('user/loadUserInfo')
 		store.dispatch('address/getAddress')

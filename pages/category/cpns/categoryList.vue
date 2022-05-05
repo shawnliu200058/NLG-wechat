@@ -11,7 +11,7 @@
 				</scroll-view>
 			</view>
 			
-			<view class="rightScroll" v-if="categoryGood[0].id">
+			<view class="rightScroll" v-if="categoryGood.length">
 				<view class="bigConScro" v-for="(item,index) in categoryGood" :key="index">
 					<template v-if="item.status">
 						<view class="good-content" @click="goGoodDetail(item.id)">
@@ -65,6 +65,10 @@
 		methods: {
 			chooseClick(index) {
 				this.isActive = index;
+				// this.categoryGood.length = 0
+				// this.categoryList[index].goods.forEach(item => {
+				// 	this.categoryGood.push(item)
+				// })
 				this.categoryGood = this.categoryList[index].goods
 				console.log(this.categoryGood)
 			},

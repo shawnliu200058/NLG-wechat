@@ -17,7 +17,7 @@ export function getOrderInfo(userId) {
 }
 export function delOrderInfo(orderId) {
 	return request({
-		url: `/order/delete/${orderId}`,
+		url: `/order/${orderId}`,
 		method: 'DELETE'
 	})
 }

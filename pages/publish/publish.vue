@@ -51,7 +51,7 @@
 			<text v-model="formData.imgCount"></text>
 		</uni-forms>
 
-		<button type="primary" size="mini" @click="submit">提交</button>
+		<button v-if="isAudit" type="primary" size="mini" @click="submit">提交</button>
 	</view>
 </template>
 
@@ -209,13 +209,14 @@
 									const goodId = res.data[0].insertId
 
 									that.uploadPic(goodId)
-
-									uni.showToast({
-										title: '提交成功'
-									})
-									that.$Router.push({
-										name: 'index'
-									})
+									// showToastBack(uni, '提交成功', that)
+									// uni.showToast({
+									// 	title: '提交成功'
+									// })
+									that.$Router.replaceAll('/pages/index/index')
+									// that.$Router.push({
+									// 	name: 'index'
+									// })
 								})
 
 							}).catch(err => {

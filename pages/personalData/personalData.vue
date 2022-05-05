@@ -110,6 +110,7 @@
 				this.curAvatar = this.userData.avatarUrl
 			},
 			setDefaultInfo() {
+				// console.log(this.userData.avatarUrl)
 				this.curAvatar = this.userData.avatarUrl
 				this.formData = {
 					...this.userData

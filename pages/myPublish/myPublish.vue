@@ -1,16 +1,21 @@
 <template>
 	<view>
 		<view class="container">
-			<u-subsection :list="list" :current="curNow" @change="sectionChange"></u-subsection>
+			<view class="subsection">
+				<u-subsection :list="list" :current="curNow" @change="sectionChange"></u-subsection>
+			</view>
 
-			<template v-if="publishInfo.length">
-				<publish-list-item v-if="curNow" v-for="good in publishInfo" :publishItem="good" :key="good.id"></publish-list-item>
-				<review-list-item v-else v-for="good in publishInfo" :publishItem="good" :key="good.id"></review-list-item>
+			<template v-if="publishInfo.length" v-for="(good, index) in publishInfo">
+				<publish-list-item v-if="good.status && !curNow" :publishItem="good" :key="good.id"/>
+				<review-list-item v-else-if="!good.status && curNow" :publishItem="good" :key="good.id"/>
 			</template>
-
-			<u-empty v-else width="200" text-size="16" icon="http://cdn.uviewui.com/uview/empty/data.png">
+			
+			<u-empty v-if="!curNow && !onCount" width="200" 
+				text-size="16" icon="http://cdn.uviewui.com/uview/empty/data.png">
 			</u-empty>
-
+			<u-empty v-else-if="curNow && !offCount" width="200" text-size="16" icon="http://cdn.uviewui.com/uview/empty/data.png">
+			</u-empty>
+<!-- {{onCount}}{{offCount}} -->
 		</view>
 	</view>
 </template>
@@ -30,7 +35,7 @@
 	export default {
 		data() {
 			return {
-				list: ['待审核', '审核通过'],
+				list: ['已上架', '未上架'],
 				curNow: 0
 			}
 		},
@@ -43,7 +48,23 @@
 			// console.log(this.publishInfo)
 		},
 		computed: {
-			...mapGetters(['publishInfo'])
+			...mapGetters(['publishInfo']),
+			// 已上架商品数量
+			onCount() {
+				return this.publishInfo.filter(item => {
+					return item.status
+				}).reduce((preValue, item) => {
+					return ++preValue
+				}, 0)
+			},
+			// 未上架商品数量
+			offCount() {
+				return this.publishInfo.filter(item => {
+					return !item.status
+				}).reduce((preValue, item) => {
+					return ++preValue
+				}, 0)
+			}
 		},
 		methods: {
 			...mapActions(['getPublishList']),
@@ -54,6 +75,8 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+	.subsection {
+		margin: 20rpx 26rpx 0 26rpx
+	}
 </style>

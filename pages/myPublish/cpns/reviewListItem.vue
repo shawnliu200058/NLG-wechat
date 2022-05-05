@@ -31,7 +31,7 @@
 				<template #column3>
 					<view class="right-align">
 						<u-button type="primary" :plain="true" text="商品信息" @click="goPublish" shape="circle"></u-button>
-						<!-- <del-publish style="margin-left: 30rpx;" :publishItem="publishItem"></del-publish> -->
+						<del-publish style="margin-left: 30rpx;" :publishItem="publishItem"></del-publish>
 					</view>
 				</template>
 			</three-column>
