@@ -14,7 +14,7 @@ const mutations = {
 const actions = {
 	getGoodList({ commit }) {
 		return new Promise((resolve, reject) => {
-			getList('good', {offset: 0, limit: 20}).then(res => {
+			getList('good', {offset: 0, limit: 1000}).then(res => {
 				// console.log(res)
 				commit('SET_GOOD_LIST', res.data.goodList.list)
 				resolve(res)

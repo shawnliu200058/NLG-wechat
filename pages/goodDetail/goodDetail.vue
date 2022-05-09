@@ -31,7 +31,9 @@
 			...mapGetters(['goodList']),
 		},
 		onLoad() {
+			console.log(this.$Route.query)
 			this.goodInfo = this.goodList.find(element => element.id == this.$Route.query.goodId);
+			console.log(this.goodInfo)
 		},
 		methods: {
 			...mapActions(['getGoodList'])

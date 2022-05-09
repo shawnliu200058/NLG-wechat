@@ -12,10 +12,10 @@ const request = (options) => {
 			data: options.data || {},
 			success: (res) => {
 				if (res.statusCode !== 200) {
-					return uni.showToast({
-						title: '获取数据失败',
-						icon: 'error'
-					})
+					// return uni.showToast({
+					// 	title: '获取数据失败',
+					// 	icon: 'error'
+					// })
 				}
 				resolve(res)
 			},

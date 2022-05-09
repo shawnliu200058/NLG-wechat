@@ -26,3 +26,7 @@ export function setToken(token) {
 export function removeToken() {
 	return Cookies.remove(TokenKey)
 }
+
+export function removeId(key) {
+	window.sessionStorage.removeItem(key)
+}

@@ -108,7 +108,7 @@
 		},
 		onLoad() {
 			this.getCategory()
-			// console.log(this.$Route.query)
+			console.log(this.$Route.query)
 			this.setDefaultInfo()
 		},
 		methods: {
@@ -123,16 +123,16 @@
 					const goodId = this.$Route.query.id
 					for (const good of this.publishInfo) {
 						if (good.id === goodId) {
-							console.log(good)
+							// console.log(good)
 							this.formData.name = good.name
 							this.formData.categoryId = good.category_id
-							console.log(this.categoryData)
+							// console.log(this.categoryData)
 							for(const item of this.categoryData) {
 								if(item.value === good.category_id) this.curCatagory = item.text
 							}
-							console.log(this.curCatagory)
+							// console.log(this.curCatagory)
 							this.formData.detail = good.detail
-							this.formData.price = good.price
+							this.formData.price = good.price.toFixed(2)
 							this.formData.unit = good.unit
 							this.formData.stock = good.stock
 							this.formData.specification = good.specification
@@ -188,13 +188,13 @@
 				this.detailPicUrl.push({
 					url: e.tempFilePaths[0]
 				})
-				console.log(this.detailPicUrl)
+				// console.log(this.detailPicUrl)
 			},
 			submit(form) {
 				if (this.$Route.query.id) return this.updatePublish()
 
 				let that = this
-
+				console.log(1111111111111111)
 				uni.showModal({
 					title: '提示',
 					content: '是否发布商品信息',
@@ -205,18 +205,17 @@
 								// console.log('表单数据信息：', res);
 								that.formData.userId = that.userId
 								createGood(that.formData).then(res => {
-									console.log(res.data[0].insertId)
+									// console.log(res.data[0].insertId)
 									const goodId = res.data[0].insertId
 
 									that.uploadPic(goodId)
-									// showToastBack(uni, '提交成功', that)
-									// uni.showToast({
-									// 	title: '提交成功'
-									// })
+									if(this.$Route.query.id) {
+										return showToastBack(uni, '提交成功', that)
+									}
 									that.$Router.replaceAll('/pages/index/index')
-									// that.$Router.push({
-									// 	name: 'index'
-									// })
+									uni.showToast({
+										title: '提交成功'
+									})
 								})
 
 							}).catch(err => {
@@ -247,7 +246,7 @@
 				let that = this
 				// 上传商品展示图
 				if (this.displayPicUrl.url) {
-					console.log(this.detailPicUrl.length)
+					// console.log(this.detailPicUrl.length)
 					uni.uploadFile({
 						url: `http://localhost:8888/upload/displayPic/${goodId}?isDelDetailPic=${this.detailPicUrl.length}`, //仅为示例，非真实的接口地址
 						filePath: this.displayPicUrl.url,
@@ -261,9 +260,14 @@
 							// 不更新详情图的情况
 							if (!this.detailPicUrl.length) {
 								this.getPublishList().then(res => {
-									showToastBack(uni, '保存成功', that, 200)
+									if(this.$Route.query.id) {
+										return showToastBack(uni, '提交成功', that)
+									}
+									that.$Router.replaceAll('/pages/index/index')
+									uni.showToast({
+										title: '提交成功'
+									})
 								})
-								// this.$Router.replaceAll('/pages/myPublish/myPublish')
 							}
 
 							// 上传商品详情图
@@ -278,11 +282,13 @@
 										success: (uploadFileRes) => {
 											// console.log(uploadFileRes.data);
 											this.getPublishList().then(res => {
-												showToastBack(uni, '保存成功', that,
-													200)
-												// uni.redirectTo({
-												// 	name: 'myPublish'
-												// })
+												if(this.$Route.query.id) {
+													return showToastBack(uni, '提交成功', that)
+												}
+												that.$Router.replaceAll('/pages/index/index')
+												uni.showToast({
+													title: '提交成功'
+												})
 											})
 										}
 									});
@@ -292,21 +298,25 @@
 					});
 				} else if (this.detailPicUrl.length) { // 只更新详情图
 					this.detailPicUrl.forEach(item => {
-						console.log(item.path)
+						// console.log(item.path)
 						uni.uploadFile({
 							url: `http://localhost:8888/upload/detailPic/${goodId}`, //仅为示例，非真实的接口地址
 							filePath: item.path,
 							name: 'detailPic',
 							success: (uploadFileRes) => {
-								this.getPublishList().then(res => {
-									showToastBack(uni, '保存成功', that, 200)
-								})
+								if(this.$Route.query.id) {
+									return showToastBack(uni, '提交成功', that)
+								}
+								that.$Router.replaceAll('/pages/index/index')
 							}
 						});
 					})
 				} else { // 更新除图片以外的信息
 					this.getPublishList().then(res => {
-						showToastBack(uni, '保存成功', that, 200)
+						if(this.$Route.query.id) {
+							return showToastBack(uni, '提交成功', that)
+						}
+						that.$Router.replaceAll('/pages/index/index')
 					})
 				}
 			},

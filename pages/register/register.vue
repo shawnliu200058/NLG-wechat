@@ -59,7 +59,9 @@
 						duration: 2000,
 						icon: 'success'
 					})
-					this.$Router.push({ name: 'login' })
+					setTimeout(() => {
+						this.$Router.push({ name: 'login' })
+					}, 500)
 				})
 			}
 		}

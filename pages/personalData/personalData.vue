@@ -143,6 +143,7 @@
 						}
 						if(this.curAvatar && this.curAvatar !== this.defaultAvatar
 							&& this.curAvatar !== this.userData.avatarUrl) this.uploadAvatar()
+							
 						uni.showToast({
 							icon: 'success',
 							title: '修改资料成功',
